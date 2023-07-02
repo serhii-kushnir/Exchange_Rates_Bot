@@ -8,9 +8,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.*;
@@ -18,9 +16,7 @@ import java.util.*;
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
 
-    private Map<Long,  Integer> levels = new HashMap<>();
     final BotConfig config;
-
 
     public TelegramBot(BotConfig config) {
         this.config = config;
@@ -46,34 +42,21 @@ public class TelegramBot extends TelegramLongPollingBot {
             if (messageText.equals("/start")) {
                 startCommandStart(chatId, update.getMessage().getChat().getUserName());
             }
-
-            if (messageText.equals("/test")) {
-                test(chatId);
-            }
         }
 
         if (update.hasCallbackQuery()) {
             String callbackData = update.getCallbackQuery().getData();
             long chatId = update.getCallbackQuery().getMessage().getChatId();
 
-            if (callbackData.equals("INFO_BUTTON")) {
-                infoMessage(chatId, update.getCallbackQuery().getData());
-            } else if (callbackData.equals("SETTINGS BUTTON")) {
-                settingsMessage(chatId, update.getCallbackQuery().getData());
-            } else if (callbackData.equals("NUMBER")) {
-                numberSetiings(chatId, update.getCallbackQuery().getData());
-            } else if (callbackData.equals("CURRENCIES")) {
-                currencySetiings(chatId, update.getCallbackQuery().getData());
-            } else if (callbackData.equals("BANK")) {
-                bankSetiings(chatId, update.getCallbackQuery().getData());
-            } else if (callbackData.equals("TIME")) {
-                timeSetiings(chatId, update.getCallbackQuery().getData());
+            switch (callbackData) {
+                case "INFO_BUTTON" -> infoMessage(chatId, update.getCallbackQuery().getData());
+                case "SETTINGS BUTTON" -> settingsMessage(chatId, update.getCallbackQuery().getData());
+                case "NUMBER" -> numberSettings(chatId, update.getCallbackQuery().getData());
+                case "CURRENCIES" -> currencySettings(chatId, update.getCallbackQuery().getData());
+                case "BANK" -> bankSettings(chatId, update.getCallbackQuery().getData());
+                case "TIME" -> timeSettings(chatId, update.getCallbackQuery().getData());
             }
         }
-
-    }
-
-    private void update() {
 
     }
 
@@ -86,23 +69,32 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         Log.Info(name);
 
-        List<String> buttons = Arrays.asList(
-                "Отримати інфо",
-                "Налаштування"
-        );
-        attachButtons(message, Map.of(
-                buttons.get(0), "INFO_BUTTON",
-                buttons.get(1), "SETTINGS BUTTON"
-        ));
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
 
+        InlineKeyboardButton infoButton = new InlineKeyboardButton();
+        infoButton.setText("Отримати інфо");
+        infoButton.setCallbackData("INFO_BUTTON");
+
+        InlineKeyboardButton settingButton = new InlineKeyboardButton();
+        settingButton.setText("Налаштування");
+        settingButton.setCallbackData("SETTINGS BUTTON");
+
+        keyboard.add(List.of(infoButton));
+        keyboard.add(List.of(settingButton));
+
+
+        markup.setKeyboard(keyboard);
+        message.setReplyMarkup(markup);
 
         executeMessage(message);
     }
 
     private void infoMessage(long chatId, String str) {
-        String answer = EmojiParser.parseToUnicode("Курс в {Приват банк}: USD/UAH\n" +
-                "Купівлля: 38.55\n" +
-                "Продажа: 39.60");
+        String answer = EmojiParser.parseToUnicode("""
+                Курс в Приват банк: USD/UAH
+                Купівлля: 38.55
+                Продаж: 39.60""");
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
@@ -110,189 +102,240 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         Log.Info(str);
 
-        List<String> buttons = Arrays.asList(
-                "Отримати інфо",
-                "Налаштування"
-        );
-        attachButtons(message, Map.of(
-                buttons.get(0), "INFO_BUTTON",
-                buttons.get(1), "SETTINGS BUTTON"
-        ));
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
 
+        InlineKeyboardButton infoButton = new InlineKeyboardButton();
+        infoButton.setText("Отримати інфо");
+        infoButton.setCallbackData("INFO_BUTTON");
+
+        InlineKeyboardButton settingButton = new InlineKeyboardButton();
+        settingButton.setText("Налаштування");
+        settingButton.setCallbackData("SETTINGS BUTTON");
+
+        keyboard.add(List.of(infoButton));
+        keyboard.add(List.of(settingButton));
+
+        markup.setKeyboard(keyboard);
+        message.setReplyMarkup(markup);
 
         executeMessage(message);
     }
 
-    private void settingsMessage(long chatId, String str) {
+    private void settingsMessage(long chatId, String name) {
         String answer = EmojiParser.parseToUnicode("Налаштування");
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(answer);
 
-        Log.Info(str);
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
 
-        List<String> buttons = Arrays.asList(
-                "Кількість знаків після коми",
-                "Банк",
-                "Валюти",
-                "Час сповіщень"
+        InlineKeyboardButton bankButton = new InlineKeyboardButton();
+        bankButton.setText("Банк");
+        bankButton.setCallbackData("BANK");
 
-        );
-        attachButtons(message, Map.of(
-                buttons.get(0), "NUMBER",
-                buttons.get(1), "BANK",
-                buttons.get(2), "CURRENCIES",
-                buttons.get(3), "TIME"
-        ));
+        InlineKeyboardButton currencyButton = new InlineKeyboardButton();
+        currencyButton.setText("Валюти");
+        currencyButton.setCallbackData("CURRENCIES");
 
+        InlineKeyboardButton timeButton = new InlineKeyboardButton();
+        timeButton.setText("Час сповіщень");
+        timeButton.setCallbackData("TIME");
+
+        InlineKeyboardButton numberButton = new InlineKeyboardButton();
+        numberButton.setText("Кількість знаків після коми");
+        numberButton.setCallbackData("NUMBER");
+
+        keyboard.add(List.of(bankButton));
+        keyboard.add(List.of(currencyButton));
+        keyboard.add(List.of(timeButton));
+        keyboard.add(List.of(numberButton));
+
+
+        markup.setKeyboard(keyboard);
+        message.setReplyMarkup(markup);
+
+        Log.Info(name);
 
         executeMessage(message);
     }
 
-    private void numberSetiings(long chatId, String str) {
+    private void numberSettings(long chatId, String name) {
         String answer = EmojiParser.parseToUnicode("Виберіть кулькість знаків після коми");
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(answer);
 
-        Log.Info(str);
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
 
-        List<String> buttons = Arrays.asList(
-                "2",
-                "3",
-                "4"
-        );
-        attachButtons(message, Map.of(
-                buttons.get(0), "N_2",
-                buttons.get(1), "N_3",
-                buttons.get(2), "N_4"
-        ));
+        InlineKeyboardButton Button2 = new InlineKeyboardButton();
+        Button2.setText("2");
+        Button2.setCallbackData("N_2");
 
+        InlineKeyboardButton Button3 = new InlineKeyboardButton();
+        Button3.setText("3");
+        Button3.setCallbackData("N_3");
+
+        InlineKeyboardButton Button4 = new InlineKeyboardButton();
+        Button4.setText("4");
+        Button4.setCallbackData("N_4");
+
+        keyboard.add(List.of(Button2));
+        keyboard.add(List.of(Button3));
+        keyboard.add(List.of(Button4));
+
+        markup.setKeyboard(keyboard);
+        message.setReplyMarkup(markup);
+
+        Log.Info(name);
 
         executeMessage(message);
     }
 
-    private void currencySetiings(long chatId, String str) {
+    private void currencySettings(long chatId, String name) {
         String answer = EmojiParser.parseToUnicode("Виберіть валюту");
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(answer);
 
-        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+        var eurButton = new InlineKeyboardButton();
 
+        eurButton.setText("EUR");
+        eurButton.setCallbackData("B_EUR");
 
-        Log.Info(str);
+        var usdButton = new InlineKeyboardButton();
 
-        List<String> buttons = Arrays.asList(
-                "USD",
-                "EUR"
-        );
-        attachButtons(message, Map.of(
-                buttons.get(0), "B_USD",
-                buttons.get(1), "B_EUR"
-        ));
+        usdButton.setText("USD");
+        usdButton.setCallbackData("B_USD");
 
+        rowInLine.add(eurButton);
+        rowInLine.add(usdButton);
+
+        rowsInLine.add(rowInLine);
+
+        markupInLine.setKeyboard(rowsInLine);
+        message.setReplyMarkup(markupInLine);
+
+        Log.Info(name);
 
         executeMessage(message);
     }
 
-    private void bankSetiings(long chatId, String str) {
+    private void bankSettings(long chatId, String name) {
         String answer = EmojiParser.parseToUnicode("Виберіть банк");
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(answer);
 
-        Log.Info(str);
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
 
-        List<String> buttons = Arrays.asList(
-                "НБУ",
-                "Приват банк",
-                "Райфайзен банк"
-        );
-        attachButtons(message, Map.of(
-                buttons.get(0), "NBU",
-                buttons.get(1), "PB",
-                buttons.get(2), "RF"
-        ));
+        InlineKeyboardButton nbuButton = new InlineKeyboardButton();
+        nbuButton.setText("НБУ");
+        nbuButton.setCallbackData("NBU");
 
+        InlineKeyboardButton pbButton = new InlineKeyboardButton();
+        pbButton.setText("Приват банк");
+        pbButton.setCallbackData("PB");
+
+        InlineKeyboardButton rfButton = new InlineKeyboardButton();
+        rfButton.setText("Райфайзен банк");
+        rfButton.setCallbackData("RF");
+
+        keyboard.add(List.of(nbuButton));
+        keyboard.add(List.of(pbButton));
+        keyboard.add(List.of(rfButton));
+
+        markup.setKeyboard(keyboard);
+        message.setReplyMarkup(markup);
+
+        Log.Info(name);
 
         executeMessage(message);
     }
 
-    private void timeSetiings(long chatId, String str) {
+    private void timeSettings(long chatId, String name) {
         String answer = EmojiParser.parseToUnicode("Виберіть час сповіщення");
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(answer);
 
-        Log.Info(str);
 
-        List<String> buttons = Arrays.asList(
-                "Виключити сповіщення",
-                "09:00",
-                "10:00",
-                "11:00",
-                "12:00",
-                "13:00",
-                "14:00",
-                "15:00",
-                "16:00",
-                "17:00",
-                "18:00"
-        );
-        attachButtons(message, Map.of(
-                buttons.get(0), "T_09",
-                buttons.get(1), "T_10",
-                buttons.get(2), "T_11",
-                buttons.get(3), "T_12",
-                buttons.get(4), "T_13",
-                buttons.get(5), "T_14",
-                buttons.get(6), "T_15",
-                buttons.get(7), "T_16",
-                buttons.get(8), "T_17",
-                buttons.get(9), "T_18"
-        ));
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
 
+        InlineKeyboardButton uButton9 = new InlineKeyboardButton();
+        uButton9.setText("09:00");
+        uButton9.setCallbackData("T_09");
+
+        InlineKeyboardButton Button10 = new InlineKeyboardButton();
+        Button10.setText("10:00");
+        Button10.setCallbackData("T_10");
+
+        InlineKeyboardButton Button11 = new InlineKeyboardButton();
+        Button11.setText("11:00");
+        Button11.setCallbackData("T_11");
+
+        InlineKeyboardButton Button12 = new InlineKeyboardButton();
+        Button12.setText("12:00");
+        Button12.setCallbackData("T_12");
+
+        InlineKeyboardButton Button13 = new InlineKeyboardButton();
+        Button13.setText("13:00");
+        Button13.setCallbackData("T_13");
+
+        InlineKeyboardButton Button14 = new InlineKeyboardButton();
+        Button14.setText("14:00");
+        Button14.setCallbackData("T_14");
+
+        InlineKeyboardButton Button15 = new InlineKeyboardButton();
+        Button15.setText("15:00");
+        Button15.setCallbackData("T_15");
+
+        InlineKeyboardButton Button16 = new InlineKeyboardButton();
+        Button16.setText("16:00");
+        Button16.setCallbackData("T_16");
+
+        InlineKeyboardButton Button17 = new InlineKeyboardButton();
+        Button17.setText("17:00");
+        Button17.setCallbackData("T_17");
+
+        InlineKeyboardButton Button18 = new InlineKeyboardButton();
+        Button18.setText("18:00");
+        Button18.setCallbackData("T_18");
+
+        InlineKeyboardButton ofButton = new InlineKeyboardButton();
+        ofButton.setText("Виключити сповіщення");
+        ofButton.setCallbackData("OFF");
+
+        keyboard.add(List.of(uButton9));
+        keyboard.add(List.of(Button10));
+        keyboard.add(List.of(Button11));
+        keyboard.add(List.of(Button12));
+        keyboard.add(List.of(Button14));
+        keyboard.add(List.of(Button15));
+        keyboard.add(List.of(Button16));
+        keyboard.add(List.of(Button17));
+        keyboard.add(List.of(Button18));
+        keyboard.add(List.of(ofButton));
+
+        markup.setKeyboard(keyboard);
+        message.setReplyMarkup(markup);
+
+        Log.Info(name);
 
         executeMessage(message);
     }
-
-    private ReplyKeyboardMarkup test(long chatId) {
-        String answer = EmojiParser.parseToUnicode("Виберіть банк");
-
-        SendMessage message = new SendMessage();
-        message.setChatId(chatId);
-        message.setText(answer);
-
-        Log.Info(" ");
-
-        KeyboardRow keyboardRow = new KeyboardRow();
-        keyboardRow.add("❗️Потрібна допомога");
-
-        return ReplyKeyboardMarkup.builder()
-                .keyboard(List.of(keyboardRow))
-                .selective(true)
-                .resizeKeyboard(true)
-                .oneTimeKeyboard(false)
-                .build();
-
-
-        //executeMessage(message);
-    }
-
-    private void sendMessage(long chatId, String textToSend) {
-        SendMessage message = new SendMessage();
-        message.setChatId(chatId);
-        message.setText(textToSend);
-
-        executeMessage(message);
-    }
-
     private void executeMessage(SendMessage message) {
         try {
             execute(message);
@@ -300,24 +343,4 @@ public class TelegramBot extends TelegramLongPollingBot {
             Log.Error(e);
         }
     }
-
-    public void attachButtons(SendMessage message, Map<String, String> buttons){
-        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-
-        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-
-        for (String buttonName : buttons.keySet()) {
-            String buutonValue = buttons.get(buttonName);
-
-            InlineKeyboardButton button = new InlineKeyboardButton();
-            button.setText(new String(buttonName.getBytes()));
-            button.setCallbackData(buutonValue);
-
-            keyboard.add(Arrays.asList(button));
-        }
-
-        markup.setKeyboard(keyboard);
-        message.setReplyMarkup(markup);
-    }
-
 }
