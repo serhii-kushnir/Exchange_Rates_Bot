@@ -58,8 +58,6 @@ public class TelegramBot extends TelegramLongPollingBot {
             String username = update.getMessage().getChat().getUserName();
             long chatId = update.getMessage().getChatId();
 
-            Log.Info(username, messageText);
-
             switch (messageText) {
                 case "/start" -> startCommandStart(chatId);
                 case "/info" -> infoMessage(chatId);
@@ -69,6 +67,8 @@ public class TelegramBot extends TelegramLongPollingBot {
                 case "/time" -> timeSettings(chatId);
                 case "/number" -> numberSettings(chatId);
             }
+
+            Log.Info(username, messageText);
         }
 
         if (update.hasCallbackQuery()) {
