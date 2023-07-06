@@ -1,6 +1,7 @@
-package com.example.Info_ExchangeBot.banks.privatbank;
+package com.example.Info_ExchangeBot.banks.nbu;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -9,15 +10,15 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
-public class CurrencyService {
-    private static final String BASE_URL = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=11";
+public class CurrencyServiceNBU {
+
+    private static final String BASE_URL = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
     private static final Gson GSON = new Gson();
     private static final HttpClient HTTP_CLIENT = HttpClients.createDefault();
 
-    public static List<CurrencyModelPrivatBank> getCurrencyRate() {
+    public static List<CurrencyModelNBU> getCurrencyRate() {
         HttpGet request = new HttpGet(BASE_URL);
 
         try {
@@ -26,8 +27,8 @@ public class CurrencyService {
 
             if (statusCode == HttpStatus.SC_OK) {
                 String responseBody = EntityUtils.toString(response.getEntity());
-                CurrencyModelPrivatBank[] tasks = GSON.fromJson(responseBody, CurrencyModelPrivatBank[].class);
-                return Arrays.asList(tasks);
+
+                return  GSON.fromJson(responseBody, new TypeToken<List<CurrencyModelNBU>>() {}.getType());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,19 +38,20 @@ public class CurrencyService {
     }
 
     public static String getCurrencyInformation(String currency) {
-        List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
+        List<CurrencyModelNBU> currencyList = getCurrencyRate();
         StringBuilder result = new StringBuilder();
+
         if (currencyList != null) {
-            for (CurrencyModelPrivatBank currencyModelPrivatbank : currencyList) {
-                if (currencyModelPrivatbank.getCcy().equals(currency)) {
-                    result.append("Курси в Приватбанк: ")
-                            .append(currencyModelPrivatbank.getCcy())
-                            .append("/")
-                            .append(currencyModelPrivatbank.getBase_ccy())
-                            .append("\nКупівля: ")
-                            .append(currencyModelPrivatbank.getBuy())
+            for (CurrencyModelNBU currencyModelNBU : currencyList) {
+                if (currencyModelNBU.getCc().equals(currency)) {
+                    result.append("Курс в NBU: ")
+                            .append(currency)
+                            .append("/UAN\n")
+                            .append("Купівля: ")
+                            .append(currencyModelNBU.getRate())
                             .append("\nПродаж: ")
-                            .append(currencyModelPrivatbank.getSale());
+                            .append(currencyModelNBU.getRate())
+                            .append("\n\n");
                 }
             }
         }
