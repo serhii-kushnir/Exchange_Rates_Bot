@@ -21,13 +21,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	implementation group: 'org.telegram', name: 'telegrambots', version: '6.7.0'
+	implementation group: 'org.telegram', name: 'telegrambots', version: '6.4.0'
 
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
-
-	implementation group: 'com.vdurmont', name: 'emoji-java', version: '4.0.0'
 
 	implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
 }
