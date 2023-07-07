@@ -1,8 +1,7 @@
 package com.example.Info_ExchangeBot.service.utilits.commands;
 
-import com.example.Info_ExchangeBot.banks.monobank.CurrencyServiceMonoBank;
 import com.example.Info_ExchangeBot.banks.nbu.CurrencyServiceNBU;
-import com.example.Info_ExchangeBot.banks.privatbank.CurrencyServicerivatBank;
+import com.example.Info_ExchangeBot.banks.privatbank.CurrencyServicePrivatBank;
 import com.example.Info_ExchangeBot.service.TelegramBot;
 import com.example.Info_ExchangeBot.service.utilits.MessageBuilder;
 
@@ -21,12 +20,10 @@ public class BotCommands {
     }
 
     public void infoMessage(long chatId, String currency) {
-        StringBuilder answer = new StringBuilder()
-                .append(CurrencyServicerivatBank.getCurrencyInformation(currency))
-                .append(CurrencyServiceNBU.getCurrencyInformation(currency));
-//                .append(CurrencyServiceMonoBank.getCurrencyInformation(currency));
+        String answer = CurrencyServicePrivatBank.getCurrencyInformation(currency) +
+                CurrencyServiceNBU.getCurrencyInformation(currency);
 
-        messageBuilder.createMessage(chatId, answer.toString());
+        messageBuilder.createMessage(chatId, answer);
     }
 
     public void settingsMessage(long chatId) {
