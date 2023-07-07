@@ -58,4 +58,19 @@ public class CurrencyServicePrivatBank {
 
         return result.toString();
     }
+
+    public static String getCurrency(String currency) {
+        List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
+        StringBuilder result = new StringBuilder();
+
+        if (currencyList != null) {
+            for (CurrencyModelPrivatBank currencyModelPrivatbank : currencyList) {
+                if (currencyModelPrivatbank.getCcy().equals(currency)) {
+                    result.append(currencyModelPrivatbank.getCcy());
+                }
+            }
+        }
+
+        return result.toString();
+    }
 }
