@@ -39,6 +39,7 @@ public class CurrencyServicePrivatBank {
     public static String getCurrencyInformation(String currency) {
         List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
         StringBuilder result = new StringBuilder();
+
         if (currencyList != null) {
             for (CurrencyModelPrivatBank currencyModelPrivatbank : currencyList) {
                 if (currencyModelPrivatbank.getCcy().equals(currency)) {

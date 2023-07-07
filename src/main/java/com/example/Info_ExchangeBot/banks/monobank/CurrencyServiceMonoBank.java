@@ -35,6 +35,18 @@ public class CurrencyServiceMonoBank {
         }
     }
 
+    public static int convertCurrencyToNumber(String currency) {
+        int currencyNumber = 0;
+
+        if (currency.contains("USD")) {
+            currencyNumber = 840;
+        } else if (currency.contains("EUR")) {
+            currencyNumber = 978;
+        }
+
+        return currencyNumber;
+    }
+
     public static String getCurrencyInformation(String currency) {
         getCurrencyRate();
         StringBuilder result = new StringBuilder();
@@ -55,17 +67,5 @@ public class CurrencyServiceMonoBank {
         }
 
         return result.toString();
-    }
-
-    public static int convertCurrencyToNumber(String currency) {
-        int currencyNumber = 0;
-
-        if (currency.contains("USD")) {
-            currencyNumber = 840;
-        } else if (currency.contains("EUR")) {
-            currencyNumber = 978;
-        }
-
-        return currencyNumber;
     }
 }
