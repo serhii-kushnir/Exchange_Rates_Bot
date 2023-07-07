@@ -19,7 +19,6 @@ public class ProcessHandler {
             case "/start" -> botCommands.start(chatId);
             case "/info" -> {
                 botCommands.infoMessage(chatId, USD, EUR, messageText);
-               // botCommands.infoMessage(chatId, EUR, messageText);
             }
             case "/setting" -> botCommands.settingsMessage(chatId);
             case "/bank" -> botCommands.bankSettings(chatId);
@@ -41,14 +40,8 @@ public class ProcessHandler {
             case "ВАЛЮТА" -> botCommands.currencySettings(chatIdBackQuery);
             case "БАНК" -> botCommands.bankSettings(chatIdBackQuery);
             case "ЧАС СПОВІЩЕНЬ" -> botCommands.timeSettings(chatIdBackQuery);
-            case "ПРИВАТ" -> {
-                botCommands.infoMessage(chatIdBackQuery, USD, callbackData);
-                botCommands.infoMessage(chatIdBackQuery, EUR, callbackData);
-            }
-            case "НБУ" -> {
-                botCommands.infoMessage(chatIdBackQuery, USD, callbackData);//botCommands.nbuOnClick(chatIdBackQuery, callbackData);
-                botCommands.infoMessage(chatIdBackQuery, EUR, callbackData);//botCommands.nbuOnClick(chatIdBackQuery, callbackData);
-            }
+            case "ПРИВАТ" -> botCommands.infoMessage(chatIdBackQuery, USD, EUR, callbackData);
+            case "НБУ" -> botCommands.infoMessage(chatIdBackQuery, USD, EUR, callbackData);
         }
 
         Log.button(username, callbackData);

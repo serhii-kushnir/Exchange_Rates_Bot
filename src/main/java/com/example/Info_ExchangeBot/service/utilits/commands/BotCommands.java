@@ -5,6 +5,8 @@ import com.example.Info_ExchangeBot.banks.privatbank.CurrencyServicePrivatBank;
 import com.example.Info_ExchangeBot.service.TelegramBot;
 import com.example.Info_ExchangeBot.service.utilits.MessageBuilder;
 
+import java.time.LocalDate;
+
 public class BotCommands {
 
     private String bank;
@@ -38,7 +40,8 @@ public class BotCommands {
     }
 
     public void infoMessage(long chatId, String currency, String currency2, String callbackQuery) {
-        StringBuilder answer = new StringBuilder();
+        LocalDate currentDate = LocalDate.now();
+        StringBuilder answer = new StringBuilder("Курс валют на поточну дату: " + currentDate + "\n\n");
 
         switch (callbackQuery) {
             case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currency2));

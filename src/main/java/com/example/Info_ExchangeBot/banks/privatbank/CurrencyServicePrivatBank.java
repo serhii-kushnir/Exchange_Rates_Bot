@@ -100,6 +100,29 @@ public class CurrencyServicePrivatBank {
         return result.toString();
     }
 
+    private static String ggg(String currency) {
+        List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
+        StringBuilder result = new StringBuilder();
+
+        if (currencyList != null) {
+            for (CurrencyModelPrivatBank currencyModelPrivatbank : currencyList) {
+                if (currencyModelPrivatbank.getCcy().equals(currency)) {
+                    result.append("Курс в Приватбанк: ")
+                            .append(currencyModelPrivatbank.getCcy())
+                            .append("/")
+                            .append(currencyModelPrivatbank.getBase_ccy())
+                            .append("\nКупівля: ")
+                            .append(currencyModelPrivatbank.getBuy())
+                            .append("\nПродаж: ")
+                            .append(currencyModelPrivatbank.getSale())
+                            .append("\n\n");
+                }
+            }
+        }
+
+        return result.toString();
+    }
+
 //    public static String getCurrency(String currency) {
 //        List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
 //        StringBuilder result = new StringBuilder();
