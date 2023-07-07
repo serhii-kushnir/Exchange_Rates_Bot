@@ -37,70 +37,14 @@ public class CurrencyServicePrivatBank {
     }
 
     public static String getCurrencyInformation(String currency) {
-        List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
-        StringBuilder result = new StringBuilder();
-
-        if (currencyList != null) {
-            for (CurrencyModelPrivatBank currencyModelPrivatbank : currencyList) {
-                if (currencyModelPrivatbank.getCcy().equals(currency)) {
-                    result.append("Курс в Приватбанк: ")
-                            .append(currencyModelPrivatbank.getCcy())
-                            .append("/")
-                            .append(currencyModelPrivatbank.getBase_ccy())
-                            .append("\nКупівля: ")
-                            .append(currencyModelPrivatbank.getBuy())
-                            .append("\nПродаж: ")
-                            .append(currencyModelPrivatbank.getSale())
-                            .append("\n\n");
-                }
-            }
-        }
-
-        return result.toString();
+        return getInfo(currency);
     }
 
-    public static String getCurrencyInformation(String currency, String currency2) {
-        List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
-        StringBuilder result = new StringBuilder();
-
-        if (currencyList != null) {
-            for (CurrencyModelPrivatBank currencyModelPrivatbank : currencyList) {
-                if (currencyModelPrivatbank.getCcy().equals(currency)) {
-                    result.append("Курс в Приватбанк: ")
-                            .append(currencyModelPrivatbank.getCcy())
-                            .append("/")
-                            .append(currencyModelPrivatbank.getBase_ccy())
-                            .append("\nКупівля: ")
-                            .append(currencyModelPrivatbank.getBuy())
-                            .append("\nПродаж: ")
-                            .append(currencyModelPrivatbank.getSale())
-                            .append("\n\n");
-
-                }
-            }
-        }
-
-        if (currencyList != null) {
-            for (CurrencyModelPrivatBank currencyModelPrivatbank : currencyList) {
-                if (currencyModelPrivatbank.getCcy().equals(currency2)) {
-                    result.append("Курс в Приватбанк: ")
-                            .append(currencyModelPrivatbank.getCcy())
-                            .append("/")
-                            .append(currencyModelPrivatbank.getBase_ccy())
-                            .append("\nКупівля: ")
-                            .append(currencyModelPrivatbank.getBuy())
-                            .append("\nПродаж: ")
-                            .append(currencyModelPrivatbank.getSale())
-                            .append("\n\n");
-
-                }
-            }
-        }
-
-        return result.toString();
+    public static String getCurrencyInformation(String currency, String currencyTwo) {
+        return getInfo(currency) + getInfo(currencyTwo);
     }
 
-    private static String ggg(String currency) {
+    private static String getInfo(String currency) {
         List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
         StringBuilder result = new StringBuilder();
 
