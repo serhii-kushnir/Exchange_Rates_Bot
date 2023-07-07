@@ -58,4 +58,41 @@ public class CurrencyServiceNBU {
 
         return result.toString();
     }
+
+    public static String getCurrencyInformation(String currency, String currency2) {
+        List<CurrencyModelNBU> currencyList = getCurrencyRate();
+        StringBuilder result = new StringBuilder();
+
+        if (currencyList != null) {
+            for (CurrencyModelNBU currencyModelNBU : currencyList) {
+                if (currencyModelNBU.getCc().equals(currency)) {
+                    result.append("Курс в NBU: ")
+                            .append(currency)
+                            .append("/UAN\n")
+                            .append("Купівля: ")
+                            .append(currencyModelNBU.getRate())
+                            .append("\nПродаж: ")
+                            .append(currencyModelNBU.getRate())
+                            .append("\n\n");
+                }
+            }
+        }
+
+        if (currencyList != null) {
+            for (CurrencyModelNBU currencyModelNBU : currencyList) {
+                if (currencyModelNBU.getCc().equals(currency2)) {
+                    result.append("Курс в NBU: ")
+                            .append(currency2)
+                            .append("/UAN\n")
+                            .append("Купівля: ")
+                            .append(currencyModelNBU.getRate())
+                            .append("\nПродаж: ")
+                            .append(currencyModelNBU.getRate())
+                            .append("\n\n");
+                }
+            }
+        }
+
+        return result.toString();
+    }
 }

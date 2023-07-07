@@ -18,8 +18,8 @@ public class ProcessHandler {
         switch (messageText) {
             case "/start" -> botCommands.start(chatId);
             case "/info" -> {
-                botCommands.infoMessage(chatId, USD, messageText);
-                botCommands.infoMessage(chatId, EUR, messageText);
+                botCommands.infoMessage(chatId, USD, EUR, messageText);
+               // botCommands.infoMessage(chatId, EUR, messageText);
             }
             case "/setting" -> botCommands.settingsMessage(chatId);
             case "/bank" -> botCommands.bankSettings(chatId);
@@ -34,16 +34,21 @@ public class ProcessHandler {
     public void callbackQuery(String callbackData, String username, long chatIdBackQuery) {
         switch (callbackData) {
             case "ОТРИМАТИ ІНФО" -> {
-                botCommands.infoMessage(chatIdBackQuery, USD, callbackData);
-                botCommands.infoMessage(chatIdBackQuery, EUR, callbackData);
+                botCommands.infoMessage(chatIdBackQuery, USD, EUR, callbackData);
             }
             case "НАЛАШТУВАННЯ" -> botCommands.settingsMessage(chatIdBackQuery);
             case "КІЛЬКІСТЬ ЗНАКІВ ПІСЛЯ КОМИ" -> botCommands.numberSettings(chatIdBackQuery);
             case "ВАЛЮТА" -> botCommands.currencySettings(chatIdBackQuery);
             case "БАНК" -> botCommands.bankSettings(chatIdBackQuery);
             case "ЧАС СПОВІЩЕНЬ" -> botCommands.timeSettings(chatIdBackQuery);
-            case "ПРИВАТ" -> botCommands.infoMessage(chatIdBackQuery, EUR, callbackData);
-            case "НБУ" -> botCommands.infoMessage(chatIdBackQuery, EUR, callbackData);//botCommands.nbuOnClick(chatIdBackQuery, callbackData);
+            case "ПРИВАТ" -> {
+                botCommands.infoMessage(chatIdBackQuery, USD, callbackData);
+                botCommands.infoMessage(chatIdBackQuery, EUR, callbackData);
+            }
+            case "НБУ" -> {
+                botCommands.infoMessage(chatIdBackQuery, USD, callbackData);//botCommands.nbuOnClick(chatIdBackQuery, callbackData);
+                botCommands.infoMessage(chatIdBackQuery, EUR, callbackData);//botCommands.nbuOnClick(chatIdBackQuery, callbackData);
+            }
         }
 
         Log.button(username, callbackData);

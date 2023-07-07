@@ -22,19 +22,30 @@ public class BotCommands {
                 new String[]{"Отримати інфо", "Налаштування"});
     }
 
-    public void infoMessage(long chatId, String currency, String bank) {
+    public void infoMessage(long chatId, String currency, String callbackQuery) {
         StringBuilder answer = new StringBuilder();
 
-        switch (bank) {
+        switch (callbackQuery) {
             case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
             case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency));
-            case "ОТРИМАТИ ІНФО" -> {
+            case "ОТРИМАТИ ІНФО", "/info" -> {
                 answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency));
                 answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
             }
-            case "/info" -> {
-                answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency));
-                answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
+        }
+
+        messageBuilder.createMessage(chatId, answer.toString());
+    }
+
+    public void infoMessage(long chatId, String currency, String currency2, String callbackQuery) {
+        StringBuilder answer = new StringBuilder();
+
+        switch (callbackQuery) {
+            case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currency2));
+            case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currency2));
+            case "ОТРИМАТИ ІНФО", "/info" -> {
+                answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currency2));
+                answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currency2));
             }
         }
 
@@ -66,14 +77,13 @@ public class BotCommands {
     }
 
     public void privatOnClick(long chatId, String bank) {
-        this.bank += bank;
-        System.out.println(this.bank);
-    }
 
-    public void nbuOnClick(long chatId, String bank) {
-        this.bank += bank;
-        System.out.println(this.bank);
     }
+//
+//    public void nbuOnClick(long chatId, String bank) {
+//        this.bank += bank;
+//        System.out.println(this.bank);
+//    }
 
     public void timeSettings(long chatId) {
         messageBuilder.createMessage(chatId,
