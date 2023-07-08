@@ -9,6 +9,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class CurrencyServicePrivatBank {
     private static final String BASE_URL = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=11";
     private static final Gson GSON = new Gson();
     private static final HttpClient HTTP_CLIENT = HttpClients.createDefault();
+    private static BigDecimal decimal;
 
     public static List<CurrencyModelPrivatBank> getCurrencyRate() {
         HttpGet request = new HttpGet(BASE_URL);
@@ -36,15 +39,17 @@ public class CurrencyServicePrivatBank {
         return null;
     }
 
-    public static String getCurrencyInformation(String currency) {
-        return getInfo(currency);
+    public static String getCurrencyInformation(String currency, String callbackQuery) {
+
+        System.out.println("getCurrencyInformation " + currency + " " + currency);
+        return getInfo(currency, callbackQuery);
     }
 
-    public static String getCurrencyInformation(String currency, String currencyTwo) {
-        return getInfo(currency) + getInfo(currencyTwo);
+    public static String getCurrencyInformation(String currency, String currencyTwo, String callbackQuery) {
+        return getInfo(currency, callbackQuery) + getInfo(currencyTwo, callbackQuery);
     }
 
-    private static String getInfo(String currency) {
+    private static String getInfo(String currency, String scale) {
         List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
         StringBuilder result = new StringBuilder();
 
@@ -56,10 +61,25 @@ public class CurrencyServicePrivatBank {
                             .append("/")
                             .append(currencyModelPrivatbank.getBase_ccy())
                             .append("\nКупівля: ")
-                            .append(currencyModelPrivatbank.getBuy())
+                            .append(bayFormat(currency, scale))
                             .append("\nПродаж: ")
                             .append(currencyModelPrivatbank.getSale())
                             .append("\n\n");
+                }
+            }
+        }
+        System.out.println("getInfo " + currency + " " + scale);
+        return result.toString();
+    }
+
+    public static String getBuy(String currency) {
+        List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
+        StringBuilder result = new StringBuilder();
+
+        if (currencyList != null) {
+            for (CurrencyModelPrivatBank currencyModelPrivatbank : currencyList) {
+                if (currencyModelPrivatbank.getCcy().equals(currency)) {
+                    result.append(currencyModelPrivatbank.getBuy());
                 }
             }
         }
@@ -67,18 +87,48 @@ public class CurrencyServicePrivatBank {
         return result.toString();
     }
 
-//    public static String getCurrency(String currency) {
-//        List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
-//        StringBuilder result = new StringBuilder();
-//
-//        if (currencyList != null) {
-//            for (CurrencyModelPrivatBank currencyModelPrivatbank : currencyList) {
-//                if (currencyModelPrivatbank.getCcy().equals(currency)) {
-//                    result.append(currencyModelPrivatbank.getCcy());
-//                }
-//            }
-//        }
-//
-//        return result.toString();
-//    }
+    public static String getSale(String currency) {
+        List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
+        StringBuilder result = new StringBuilder();
+
+        if (currencyList != null) {
+            for (CurrencyModelPrivatBank currencyModelPrivatbank : currencyList) {
+                if (currencyModelPrivatbank.getCcy().equals(currency)) {
+                    result.append(currencyModelPrivatbank.getSale());
+                }
+            }
+        }
+
+        return result.toString();
+    }
+    
+    public static BigDecimal bayFormat(String currency, String scale) {
+        double bay = Double.parseDouble(getBuy(currency));
+        decimalFormat(bay, scale);
+
+        System.out.println("bayFormat " + bay + " " +  scale);
+        return decimal;
+    }
+
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private static void decimalFormat(double price, String scale) {
+
+        int num = 2;
+        if (isNumeric(scale)) {
+            num += Integer.parseInt(scale);
+        }
+    
+        decimal = new BigDecimal(price).setScale(num, RoundingMode.HALF_UP);
+
+        System.out.println("decimalFormat " + scale);
+    }
+
 }

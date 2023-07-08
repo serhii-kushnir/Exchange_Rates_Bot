@@ -7,14 +7,14 @@ import com.example.Info_ExchangeBot.service.utilits.MessageBuilder;
 
 import java.time.LocalDate;
 
-public class BotCommands {
+public class BotCommandsHandler {
 
-    private String bank;
+//    private String bank;
     private final String[] TIME = {"09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "Виключити сповіщення"};
 
     private final MessageBuilder messageBuilder;
 
-    public BotCommands(TelegramBot telegramBot) {
+    public BotCommandsHandler(TelegramBot telegramBot) {
         this.messageBuilder = new MessageBuilder(telegramBot);
     }
 
@@ -29,29 +29,30 @@ public class BotCommands {
 
         switch (callbackQuery) {
             case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
-            case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency));
+            case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, callbackQuery));
             case "ОТРИМАТИ ІНФО", "/info" -> {
-                answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency));
+                answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, callbackQuery));
                 answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
             }
         }
-
         messageBuilder.createMessage(chatId, answer.toString());
     }
 
-    public void infoMessage(long chatId, String currency, String currency2, String callbackQuery) {
+    public void infoMessage(long chatId, String currency, String currencyTwo, String callbackQuery) {
         LocalDate currentDate = LocalDate.now();
         StringBuilder answer = new StringBuilder("Курс валют на поточну дату: " + currentDate + "\n\n");
 
         switch (callbackQuery) {
-            case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currency2));
-            case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currency2));
+            case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currencyTwo));
+            case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currencyTwo));
             case "ОТРИМАТИ ІНФО", "/info" -> {
-                answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currency2));
-                answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currency2));
+                answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currencyTwo));
+                answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currencyTwo));
+            }
+           case "2", "3", "4" -> {
+               CurrencyFormat(chatId, callbackQuery, currency);
             }
         }
-
         messageBuilder.createMessage(chatId, answer.toString());
     }
 
@@ -65,6 +66,14 @@ public class BotCommands {
         messageBuilder.createMessage(chatId,
                 "Виберіть кількість знаків після коми",
                 new String[]{"2", "3", "4"});
+    }
+
+    public void CurrencyFormat(long chatId, String callbackQuery, String currency) {
+        CurrencyServicePrivatBank.bayFormat(currency, callbackQuery);
+        CurrencyServicePrivatBank.bayFormat(currency, callbackQuery);
+
+        messageBuilder.createMessage(chatId, "Кількість знаків післякими буде: " + callbackQuery);
+        System.out.println(CurrencyServicePrivatBank.bayFormat(currency, callbackQuery));
     }
 
     public void currencySettings(long chatId) {
