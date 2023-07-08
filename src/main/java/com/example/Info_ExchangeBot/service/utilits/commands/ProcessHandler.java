@@ -38,7 +38,7 @@ public class ProcessHandler {
             case "ЧАС СПОВІЩЕНЬ" -> botCommandsHandler.timeSettings(chatIdBackQuery);
             case "ПРИВАТ" -> botCommandsHandler.infoMessage(chatIdBackQuery, USD, EUR, callbackData);
             case "НБУ" -> botCommandsHandler.infoMessage(chatIdBackQuery, USD, EUR, callbackData);
-            case "2", "3", "4" -> botCommandsHandler.CurrencyFormat(chatIdBackQuery, callbackData, EUR);
+            case "2", "3", "4" -> botCommandsHandler.CurrencyFormat(chatIdBackQuery, callbackData, USD);
         }
 
         Log.button(username, callbackData);

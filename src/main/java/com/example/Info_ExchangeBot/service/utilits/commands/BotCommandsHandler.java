@@ -9,7 +9,6 @@ import java.time.LocalDate;
 
 public class BotCommandsHandler {
 
-//    private String bank;
     private final String[] TIME = {"09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "Виключити сповіщення"};
 
     private final MessageBuilder messageBuilder;
@@ -25,7 +24,8 @@ public class BotCommandsHandler {
     }
 
     public void infoMessage(long chatId, String currency, String callbackQuery) {
-        StringBuilder answer = new StringBuilder();
+        LocalDate currentDate = LocalDate.now();
+        StringBuilder answer = new StringBuilder("Курс валют на поточну дату: " + currentDate + "\n\n");
 
         switch (callbackQuery) {
             case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
@@ -33,6 +33,9 @@ public class BotCommandsHandler {
             case "ОТРИМАТИ ІНФО", "/info" -> {
                 answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, callbackQuery));
                 answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
+            }
+            case "2", "3", "4" -> {
+                CurrencyFormat(chatId, callbackQuery, currency);
             }
         }
         messageBuilder.createMessage(chatId, answer.toString());
@@ -44,9 +47,9 @@ public class BotCommandsHandler {
 
         switch (callbackQuery) {
             case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currencyTwo));
-            case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currencyTwo));
+            case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currencyTwo, callbackQuery));
             case "ОТРИМАТИ ІНФО", "/info" -> {
-                answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currencyTwo));
+                answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currencyTwo, callbackQuery));
                 answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currencyTwo));
             }
            case "2", "3", "4" -> {
@@ -69,7 +72,6 @@ public class BotCommandsHandler {
     }
 
     public void CurrencyFormat(long chatId, String callbackQuery, String currency) {
-        CurrencyServicePrivatBank.bayFormat(currency, callbackQuery);
         CurrencyServicePrivatBank.bayFormat(currency, callbackQuery);
 
         messageBuilder.createMessage(chatId, "Кількість знаків післякими буде: " + callbackQuery);
