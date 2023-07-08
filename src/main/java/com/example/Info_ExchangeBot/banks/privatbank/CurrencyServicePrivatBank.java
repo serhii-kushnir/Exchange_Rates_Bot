@@ -16,11 +16,13 @@ import java.util.List;
 
 public class CurrencyServicePrivatBank {
 
+    private static long chat;
     private static int nem = 2;
     private static final String BASE_URL = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=11";
     private static final Gson GSON = new Gson();
     private static final HttpClient HTTP_CLIENT = HttpClients.createDefault();
     private static BigDecimal decimal;
+
 
     public static List<CurrencyModelPrivatBank> getCurrencyRate() {
         HttpGet request = new HttpGet(BASE_URL);
@@ -119,13 +121,24 @@ public class CurrencyServicePrivatBank {
 
     private static void decimalFormat(double price, String callbackQuery) {
 
-        switch (callbackQuery) {
-            case "2", "3", "4" -> nem = Integer.parseInt(callbackQuery);
+        if (chat ==  getchatId()) {
+            switch (callbackQuery) {
+                case "2", "3", "4" -> nem = Integer.parseInt(callbackQuery);
+            }
         }
+
 
         decimal = new BigDecimal(price).setScale(nem, RoundingMode.HALF_UP);
 
         System.out.println("decimalFormat " + callbackQuery);
+    }
+
+    public static void setchatId(long chatId) {
+        chat = chatId;
+    }
+
+    public static long getchatId() {
+        return chat;
     }
 
 }

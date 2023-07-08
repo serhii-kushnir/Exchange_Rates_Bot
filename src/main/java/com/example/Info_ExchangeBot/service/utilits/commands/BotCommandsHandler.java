@@ -28,15 +28,12 @@ public class BotCommandsHandler {
         StringBuilder answer = new StringBuilder("Курс валют на поточну дату: " + currentDate + "\n\n");
 
         switch (callbackQuery) {
-            case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
-            case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, callbackQuery));
+//            case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
+//            case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, callbackQuery));
             case "ОТРИМАТИ ІНФО", "/info" -> {
                 answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, callbackQuery));
                 answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
             }
-//            case "2", "3", "4" -> {
-//                CurrencyFormat(chatId, callbackQuery, currency);
-//            }
         }
         messageBuilder.createMessage(chatId, answer.toString());
     }
@@ -46,15 +43,12 @@ public class BotCommandsHandler {
         StringBuilder answer = new StringBuilder("Курс валют на поточну дату: " + currentDate + "\n\n");
 
         switch (callbackQuery) {
-            case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currencyTwo));
+            case "НБУ" -> bankHandler(chatId, currency, callbackQuery);
             case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currencyTwo, callbackQuery));
             case "ОТРИМАТИ ІНФО", "/info" -> {
                 answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currencyTwo, callbackQuery));
                 answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currencyTwo));
             }
-//           case "2", "3", "4" -> {
-//               CurrencyFormat(chatId, callbackQuery, currency);
-//            }
         }
         messageBuilder.createMessage(chatId, answer.toString());
     }
@@ -73,10 +67,12 @@ public class BotCommandsHandler {
 
     public void CurrencyFormat(long chatId, String callbackQuery, String currency) {
         CurrencyServicePrivatBank.bayFormat(currency, callbackQuery);
+        CurrencyServicePrivatBank.setchatId(chatId);
 
         messageBuilder.createMessage(chatId, "Кількість знаків післякими буде: " + callbackQuery);
         System.out.println(CurrencyServicePrivatBank.bayFormat(currency, callbackQuery));
         System.out.println("CurrencyFormat " + callbackQuery);
+        System.out.println("chat " + CurrencyServicePrivatBank.getchatId());
     }
 
     public void currencySettings(long chatId) {
@@ -88,17 +84,38 @@ public class BotCommandsHandler {
     public void bankSettings(long chatId) {
         messageBuilder.createMessage(chatId,
                 "Виберіть банк",
-                new String[]{"НБУ", "Приват"});
+                new String[]{"НБУ", "Приват", "Всі банки"});
     }
 
-    public void privatOnClick(long chatId, String bank) {
+    public void bankHandler(long chatId, String currency, String callbackQuery) {
+        StringBuilder answer = new StringBuilder("Ви обрали ");
 
+        switch (callbackQuery) {
+            case "НБУ" -> {
+                answer.append("НБУ банк");
+                bankInfo(chatId, currency, callbackQuery);
+            }
+            case "ПРИВАТ" -> answer.append("Приват банк");
+            case "ВСІ БАНКИ" -> answer.append("всі банки");
+        }
+
+        messageBuilder.createMessage(chatId, answer.toString());
     }
-//
-//    public void nbuOnClick(long chatId, String bank) {
-//        this.bank += bank;
-//        System.out.println(this.bank);
-//    }
+    public void  bankInfo(long chatId, String callbackQuery, String currency) {
+        LocalDate currentDate = LocalDate.now();
+        StringBuilder answer = new StringBuilder("Курс валют на поточну дату: " + currentDate + "\n\n");
+
+        switch (callbackQuery) {
+            case "НБУ" -> answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
+            case "ПРИВАТ" -> answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, callbackQuery));
+            case "ОТРИМАТИ ІНФО", "/info" -> {
+                answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, callbackQuery));
+                answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
+            }
+        }
+
+//        messageBuilder.createMessage(chatId, answer.toString());
+    }
 
     public void timeSettings(long chatId) {
         messageBuilder.createMessage(chatId,

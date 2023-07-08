@@ -36,8 +36,7 @@ public class ProcessHandler {
             case "ВАЛЮТА" -> botCommandsHandler.currencySettings(chatIdBackQuery);
             case "БАНК" -> botCommandsHandler.bankSettings(chatIdBackQuery);
             case "ЧАС СПОВІЩЕНЬ" -> botCommandsHandler.timeSettings(chatIdBackQuery);
-            case "ПРИВАТ" -> botCommandsHandler.infoMessage(chatIdBackQuery, USD, EUR, callbackData);
-            case "НБУ" -> botCommandsHandler.infoMessage(chatIdBackQuery, USD, EUR, callbackData);
+            case "ПРИВАТ", "НБУ", "ВСІ БАНКИ" -> botCommandsHandler.bankHandler(chatIdBackQuery, USD, callbackData);
             case "2", "3", "4" -> botCommandsHandler.CurrencyFormat(chatIdBackQuery, callbackData, USD);
         }
 
