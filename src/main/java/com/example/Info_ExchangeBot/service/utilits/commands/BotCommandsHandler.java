@@ -34,9 +34,9 @@ public class BotCommandsHandler {
                 answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, callbackQuery));
                 answer.append(CurrencyServiceNBU.getCurrencyInformation(currency));
             }
-            case "2", "3", "4" -> {
-                CurrencyFormat(chatId, callbackQuery, currency);
-            }
+//            case "2", "3", "4" -> {
+//                CurrencyFormat(chatId, callbackQuery, currency);
+//            }
         }
         messageBuilder.createMessage(chatId, answer.toString());
     }
@@ -52,9 +52,9 @@ public class BotCommandsHandler {
                 answer.append(CurrencyServicePrivatBank.getCurrencyInformation(currency, currencyTwo, callbackQuery));
                 answer.append(CurrencyServiceNBU.getCurrencyInformation(currency, currencyTwo));
             }
-           case "2", "3", "4" -> {
-               CurrencyFormat(chatId, callbackQuery, currency);
-            }
+//           case "2", "3", "4" -> {
+//               CurrencyFormat(chatId, callbackQuery, currency);
+//            }
         }
         messageBuilder.createMessage(chatId, answer.toString());
     }
@@ -76,6 +76,7 @@ public class BotCommandsHandler {
 
         messageBuilder.createMessage(chatId, "Кількість знаків післякими буде: " + callbackQuery);
         System.out.println(CurrencyServicePrivatBank.bayFormat(currency, callbackQuery));
+        System.out.println("CurrencyFormat " + callbackQuery);
     }
 
     public void currencySettings(long chatId) {

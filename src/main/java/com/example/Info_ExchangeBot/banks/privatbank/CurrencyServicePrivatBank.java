@@ -15,6 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CurrencyServicePrivatBank {
+
+    private static int nem = 2;
     private static final String BASE_URL = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=11";
     private static final Gson GSON = new Gson();
     private static final HttpClient HTTP_CLIENT = HttpClients.createDefault();
@@ -46,10 +48,10 @@ public class CurrencyServicePrivatBank {
     }
 
     public static String getCurrencyInformation(String currency, String currencyTwo, String callbackQuery) {
-        return getInfo(currency, callbackQuery) + getInfo(currencyTwo, callbackQuery);
+        return getInfo(currency,  callbackQuery) + getInfo(currencyTwo, callbackQuery);
     }
 
-    private static String getInfo(String currency, String scale) {
+    private static String getInfo(String currency, String callbackQuery) {
         List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
         StringBuilder result = new StringBuilder();
 
@@ -61,14 +63,14 @@ public class CurrencyServicePrivatBank {
                             .append("/")
                             .append(currencyModelPrivatbank.getBase_ccy())
                             .append("\nКупівля: ")
-                            .append(bayFormat(currency, scale))
+                            .append(bayFormat(currency, callbackQuery))
                             .append("\nПродаж: ")
                             .append(currencyModelPrivatbank.getSale())
                             .append("\n\n");
                 }
             }
         }
-        System.out.println("getInfo " + currency + " " + scale);
+        System.out.println("getInfo " + currency + " " + callbackQuery);
         return result.toString();
     }
 
@@ -101,34 +103,29 @@ public class CurrencyServicePrivatBank {
 
         return result.toString();
     }
-    
-    public static BigDecimal bayFormat(String currency, String scale) {
+
+    public static String bayFormat(String currency, String callbackQuery) {
         double bay = Double.parseDouble(getBuy(currency));
-        decimalFormat(bay, scale);
 
-        System.out.println("bayFormat " + bay + " " +  scale);
-        return decimal;
+        decimalFormat(bay, callbackQuery);
+
+        System.out.println("bayFormat " + bay + " " +  callbackQuery);
+        return String.valueOf(decimal);
     }
 
-    public static boolean isNumeric(String str) {
-        try {
-            Double.parseDouble(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+//    public static boolean isNumeric(String str) {
+//        return str.matches("-?\\d+(\\.\\d+)?");
+//    }
+
+    private static void decimalFormat(double price, String callbackQuery) {
+
+        switch (callbackQuery) {
+            case "2", "3", "4" -> nem = Integer.parseInt(callbackQuery);
         }
-    }
 
-    private static void decimalFormat(double price, String scale) {
+        decimal = new BigDecimal(price).setScale(nem, RoundingMode.HALF_UP);
 
-        int num = 2;
-        if (isNumeric(scale)) {
-            num += Integer.parseInt(scale);
-        }
-    
-        decimal = new BigDecimal(price).setScale(num, RoundingMode.HALF_UP);
-
-        System.out.println("decimalFormat " + scale);
+        System.out.println("decimalFormat " + callbackQuery);
     }
 
 }
