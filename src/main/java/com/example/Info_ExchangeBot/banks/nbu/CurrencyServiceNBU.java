@@ -38,6 +38,14 @@ public class CurrencyServiceNBU {
     }
 
     public static String getCurrencyInformation(String currency) {
+        return getIngo(currency);
+    }
+
+    public static String getCurrencyInformation(String currency, String currencyTwo) {
+        return getIngo(currency) + getIngo(currencyTwo);
+    }
+
+    public static String getIngo(String currency) {
         List<CurrencyModelNBU> currencyList = getCurrencyRate();
         StringBuilder result = new StringBuilder();
 
