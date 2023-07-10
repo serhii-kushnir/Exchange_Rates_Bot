@@ -45,7 +45,7 @@ public class ScheduledMessageSender {
     private String sendMessage() {
         LocalDate currentDate = LocalDate.now();
         StringBuilder answer = new StringBuilder();
-        answer.append("11Курс валют на поточну дату11: ");
+        answer.append("TEST");
         answer.append(currentDate);
         answer.append("\n\n");
         answer.append(CurrencyServicePrivatBank.getCurrencyInformation("USD", "/number"));

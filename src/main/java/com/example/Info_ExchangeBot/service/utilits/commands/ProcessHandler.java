@@ -21,7 +21,7 @@ public class ProcessHandler {
         this.messageSent = false;
     }
 
-    LocalDateTime scheduledTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(16, 14));
+    LocalDateTime scheduledTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(10, 32));
     public void message(String messageText, String username, long chatId) {
 
 
