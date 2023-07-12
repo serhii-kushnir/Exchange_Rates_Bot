@@ -50,7 +50,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         ProcessHandler processHandler = new ProcessHandler(this);
         ScheduledMessageSender scheduledMessageSender = new ScheduledMessageSender(this);
-        scheduledMessageSender.scheduleMessage(update.getMessage().getChatId(),scheduledTime);
+        //scheduledMessageSender.scheduleMessage(update.getMessage().getChatId(),scheduledTime);
 
         long chatId;
         String userName;
@@ -61,12 +61,11 @@ public class TelegramBot extends TelegramLongPollingBot {
             userName = update.getMessage().getFrom().getFirstName();
             receivedMessage = update.getMessage().getText();
 
-
             processHandler.message(receivedMessage, userName, chatId);
         }
 
         if (update.hasCallbackQuery()) {
-            chatId = update.getCallbackQuery().getMessage().getChatId();;
+            chatId = update.getCallbackQuery().getMessage().getChatId();
             userName = update.getCallbackQuery().getFrom().getFirstName();
             receivedMessage = update.getCallbackQuery().getData();
 

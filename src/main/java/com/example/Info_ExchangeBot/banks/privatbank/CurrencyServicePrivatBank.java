@@ -115,9 +115,6 @@ public class CurrencyServicePrivatBank {
         return String.valueOf(decimal);
     }
 
-//    public static boolean isNumeric(String str) {
-//        return str.matches("-?\\d+(\\.\\d+)?");
-//    }
 
     private static void decimalFormat(double price, String callbackQuery) {
 
