@@ -2,9 +2,8 @@ package com.example.Info_ExchangeBot.service;
 
 import com.example.Info_ExchangeBot.config.BotConfig;
 import com.example.Info_ExchangeBot.service.utilits.Log;
-import com.example.Info_ExchangeBot.service.utilits.ScheduledMessageSender;
+import com.example.Info_ExchangeBot.service.utilits.ProcessHandler;
 import com.example.Info_ExchangeBot.service.utilits.commands.BotCommandListMenu;
-import com.example.Info_ExchangeBot.service.utilits.commands.ProcessHandler;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
@@ -13,20 +12,17 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
 
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
 
     private final BotConfig config;
+    private final ProcessHandler processHandler;
 
     public TelegramBot(BotConfig config) {
         this.config = config;
-
+        this.processHandler = new ProcessHandler(this);
         List<BotCommand> botCommandList = BotCommandListMenu.getBotCommandList();
 
         try {
@@ -45,14 +41,11 @@ public class TelegramBot extends TelegramLongPollingBot {
     public String getBotUsername() {
         return config.getBotName();
     }
-    LocalDateTime scheduledTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(10, 35));
+
     @Override
     public void onUpdateReceived(Update update) {
-        ProcessHandler processHandler = new ProcessHandler(this);
-        ScheduledMessageSender scheduledMessageSender = new ScheduledMessageSender(this);
-        //scheduledMessageSender.scheduleMessage(update.getMessage().getChatId(),scheduledTime);
-
         long chatId;
+        long messageId;
         String userName;
         String receivedMessage;
 
@@ -68,8 +61,9 @@ public class TelegramBot extends TelegramLongPollingBot {
             chatId = update.getCallbackQuery().getMessage().getChatId();
             userName = update.getCallbackQuery().getFrom().getFirstName();
             receivedMessage = update.getCallbackQuery().getData();
+            messageId = update.getCallbackQuery().getMessage().getMessageId();
 
-            processHandler.callbackQuery(receivedMessage, userName, chatId);
+            processHandler.callbackQuery(receivedMessage, userName, chatId, messageId);
         }
     }
 

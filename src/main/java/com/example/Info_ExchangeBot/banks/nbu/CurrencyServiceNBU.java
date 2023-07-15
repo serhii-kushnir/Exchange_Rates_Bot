@@ -8,7 +8,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -38,26 +37,16 @@ public class CurrencyServiceNBU {
     }
 
     public static String getCurrencyInformation(String currency) {
-        return getIngo(currency);
-    }
-
-    public static String getCurrencyInformation(String currency, String currencyTwo) {
-        return getIngo(currency) + getIngo(currencyTwo);
-    }
-
-    public static String getIngo(String currency) {
         List<CurrencyModelNBU> currencyList = getCurrencyRate();
         StringBuilder result = new StringBuilder();
 
         if (currencyList != null) {
             for (CurrencyModelNBU currencyModelNBU : currencyList) {
                 if (currencyModelNBU.getCc().equals(currency)) {
-                    result.append("Курс в NBU: ")
-                            .append(currency)
-                            .append("/UAN\n")
-                            .append("Купівля: ")
-                            .append(currencyModelNBU.getRate())
-                            .append("\nПродаж: ")
+                    result.append("Офіційний курс: ")
+                            .append(currencyModelNBU.getCc())
+                            .append("/UAH")
+                            .append("\nКурс: ")
                             .append(currencyModelNBU.getRate())
                             .append("\n\n");
                 }
