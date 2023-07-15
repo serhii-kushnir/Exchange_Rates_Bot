@@ -43,7 +43,7 @@ public class UserServices {
             answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
         } else if (checkSelectedBank(chatId).equals("НБУ")) {
             answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
-        } else if (checkSelectedBank(chatId).equals("Mоно")) {
+        } else if (checkSelectedBank(chatId).equals("Моно")) {
             answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
         } else if (checkSelectedBank(chatId).equals("Всі банки")) {
             answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));

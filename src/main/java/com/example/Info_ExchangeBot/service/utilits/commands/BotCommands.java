@@ -112,81 +112,88 @@ public class BotCommands {
         editMessage.executeEditMessageText(Constants.BANK, chatId, messageId, Buttons.bank(chatId));
     }
 
-    public void setTime9(long chatId, long messageId){
+    public void setAllBank(long chatId, long messageId) {
         sendMessage.setChatId(chatId);
-        getUserSettingsById(chatId).setTime("09:00");
+        getUserSettingsById(chatId).setBank("Всі банки");
 
-        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+        editMessage.executeEditMessageText(Constants.BANK, chatId, messageId, Buttons.bank(chatId));
     }
-
-    public void setTime10(long chatId, long messageId){
-        sendMessage.setChatId(chatId);
-        getUserSettingsById(chatId).setTime("10:00");
-
-        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
-    }
-
-    public void setTime11(long chatId, long messageId){
-        sendMessage.setChatId(chatId);
-        getUserSettingsById(chatId).setTime("11:00");
-
-        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
-
-    }
-
-    public void setTime12(long chatId, long messageId){
-        sendMessage.setChatId(chatId);
-        getUserSettingsById(chatId).setTime("12:00");
-
-        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
-    }
-
-    public void setTime13(long chatId, long messageId){
-        sendMessage.setChatId(chatId);
-        getUserSettingsById(chatId).setTime("13:00");
-
-        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
-    }
-
-    public void setTime14(long chatId, long messageId){
-        sendMessage.setChatId(chatId);
-        getUserSettingsById(chatId).setTime("14:00");
-
-        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
-    }
-
-    public void setTime15(long chatId, long messageId){
-        sendMessage.setChatId(chatId);
-        getUserSettingsById(chatId).setTime("15:00");
-
-        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
-    }
-
-    public void setTime16(long chatId, long messageId){
-        sendMessage.setChatId(chatId);
-        getUserSettingsById(chatId).setTime("16:00");
-
-        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
-    }
-
-    public void setTime17(long chatId, long messageId){
-        sendMessage.setChatId(chatId);
-        getUserSettingsById(chatId).setTime("17:00");
-
-        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
-    }
-
-    public void setTime18(long chatId, long messageId){
-        sendMessage.setChatId(chatId);
-        getUserSettingsById(chatId).setTime("18:00");
-
-        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
-    }
-
-    public void setTimeOff(long chatId, long messageId){
-        sendMessage.setChatId(chatId);
-        getUserSettingsById(chatId).setTime("Вимкнути сповіщення");
-
-        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
-    }
+//
+//    public void setTime9(long chatId, long messageId){
+//        sendMessage.setChatId(chatId);
+//        getUserSettingsById(chatId).setTime("09:00");
+//
+//        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+//    }
+//
+//    public void setTime10(long chatId, long messageId){
+//        sendMessage.setChatId(chatId);
+//        getUserSettingsById(chatId).setTime("10:00");
+//
+//        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+//    }
+//
+//    public void setTime11(long chatId, long messageId){
+//        sendMessage.setChatId(chatId);
+//        getUserSettingsById(chatId).setTime("11:00");
+//
+//        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+//
+//    }
+//
+//    public void setTime12(long chatId, long messageId){
+//        sendMessage.setChatId(chatId);
+//        getUserSettingsById(chatId).setTime("12:00");
+//
+//        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+//    }
+//
+//    public void setTime13(long chatId, long messageId){
+//        sendMessage.setChatId(chatId);
+//        getUserSettingsById(chatId).setTime("13:00");
+//
+//        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+//    }
+//
+//    public void setTime14(long chatId, long messageId){
+//        sendMessage.setChatId(chatId);
+//        getUserSettingsById(chatId).setTime("14:00");
+//
+//        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+//    }
+//
+//    public void setTime15(long chatId, long messageId){
+//        sendMessage.setChatId(chatId);
+//        getUserSettingsById(chatId).setTime("15:00");
+//
+//        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+//    }
+//
+//    public void setTime16(long chatId, long messageId){
+//        sendMessage.setChatId(chatId);
+//        getUserSettingsById(chatId).setTime("16:00");
+//
+//        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+//    }
+//
+//    public void setTime17(long chatId, long messageId){
+//        sendMessage.setChatId(chatId);
+//        getUserSettingsById(chatId).setTime("17:00");
+//
+//        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+//    }
+//
+//    public void setTime18(long chatId, long messageId){
+//        sendMessage.setChatId(chatId);
+//        getUserSettingsById(chatId).setTime("18:00");
+//
+//        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+//    }
+//
+//    public void setTimeOff(long chatId, long messageId){
+//        sendMessage.setChatId(chatId);
+//        getUserSettingsById(chatId).setTime("Вимкнути сповіщення");
+//
+//        editMessage.executeEditMessageText(Constants.TIME, chatId, messageId, Buttons.time(chatId));
+//    }
 }

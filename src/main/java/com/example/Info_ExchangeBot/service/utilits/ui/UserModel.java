@@ -12,8 +12,8 @@ public class UserModel {
 
     public UserModel() {
         this.currency = "USD";
-        this.bank = "Всі банки";
-        this.time = "Вимкнути сповіщення";
+        this.bank = "Моно";
         this.number = "2";
+        //this.time = "Вимкнути сповіщення";
     }
 }

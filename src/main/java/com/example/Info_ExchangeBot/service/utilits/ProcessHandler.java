@@ -36,22 +36,23 @@ public class ProcessHandler {
             case "ПРИВАТ" -> botCommands.setPrivat(chatIdBackQuery, messageId);
             case "МОНО" -> botCommands.setMono(chatIdBackQuery, messageId);
             case "НБУ" -> botCommands.setNBU(chatIdBackQuery, messageId);
+            case "ВСІ БАНКИ" -> botCommands.setAllBank(chatIdBackQuery, messageId);
             case "USD" -> botCommands.setUSD(chatIdBackQuery, messageId);
             case "EUR" -> botCommands.setEUR(chatIdBackQuery, messageId);
             case "2" -> botCommands.setTwoNumbers(chatIdBackQuery, messageId);
             case "3" -> botCommands.setThreeNumbers(chatIdBackQuery, messageId);
             case "4" -> botCommands.setFourNumbers(chatIdBackQuery, messageId);
-            case "09:00" -> botCommands.setTime9(chatIdBackQuery, messageId);
-            case "10:00" -> botCommands.setTime10(chatIdBackQuery, messageId);
-            case "11:00" -> botCommands.setTime11(chatIdBackQuery, messageId);
-            case "12:00" -> botCommands.setTime12(chatIdBackQuery, messageId);
-            case "13:00" -> botCommands.setTime13(chatIdBackQuery, messageId);
-            case "14:00" -> botCommands.setTime14(chatIdBackQuery, messageId);
-            case "15:00" -> botCommands.setTime15(chatIdBackQuery, messageId);
-            case "16:00" -> botCommands.setTime16(chatIdBackQuery, messageId);
-            case "17:00" -> botCommands.setTime17(chatIdBackQuery, messageId);
-            case "18:00" -> botCommands.setTime18(chatIdBackQuery, messageId);
-            case "ВИМКНУТИ СПОВІЩЕННЯ" -> botCommands.setTimeOff(chatIdBackQuery, messageId);
+//            case "09:00" -> botCommands.setTime9(chatIdBackQuery, messageId);
+//            case "10:00" -> botCommands.setTime10(chatIdBackQuery, messageId);
+//            case "11:00" -> botCommands.setTime11(chatIdBackQuery, messageId);
+//            case "12:00" -> botCommands.setTime12(chatIdBackQuery, messageId);
+//            case "13:00" -> botCommands.setTime13(chatIdBackQuery, messageId);
+//            case "14:00" -> botCommands.setTime14(chatIdBackQuery, messageId);
+//            case "15:00" -> botCommands.setTime15(chatIdBackQuery, messageId);
+//            case "16:00" -> botCommands.setTime16(chatIdBackQuery, messageId);
+//            case "17:00" -> botCommands.setTime17(chatIdBackQuery, messageId);
+//            case "18:00" -> botCommands.setTime18(chatIdBackQuery, messageId);
+//            case "ВИМКНУТИ СПОВІЩЕННЯ" -> botCommands.setTimeOff(chatIdBackQuery, messageId);
             case "\uD83C\uDFE0 НА ГОЛОВНУ" -> botCommands.home(chatIdBackQuery);
         }
 

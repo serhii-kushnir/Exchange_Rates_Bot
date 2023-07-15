@@ -43,7 +43,7 @@ public class CurrencyServiceNBU {
         if (currencyList != null) {
             for (CurrencyModelNBU currencyModelNBU : currencyList) {
                 if (currencyModelNBU.getCc().equals(currency)) {
-                    result.append("Офіційний курс: ")
+                    result.append("Курс в НБУ: ")
                             .append(currencyModelNBU.getCc())
                             .append("/UAH")
                             .append("\nКурс: ")
