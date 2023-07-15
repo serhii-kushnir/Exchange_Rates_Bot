@@ -12,7 +12,7 @@ public class UserModel {
 
     public UserModel() {
         this.currency = "USD";
-        this.bank = "Приват";
+        this.bank = "Всі банки";
         this.time = "Вимкнути сповіщення";
         this.number = "2";
     }

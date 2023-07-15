@@ -5,6 +5,7 @@ import com.example.Info_ExchangeBot.banks.nbu.CurrencyServiceNBU;
 import com.example.Info_ExchangeBot.banks.privatbank.CurrencyServicePrivatBank;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -34,17 +35,23 @@ public class UserServices {
     }
 
     public static String getCurrencyInformationFromSelectedBank(long chatId) {
-        String result;
+        var currentDate = LocalDate.now();
+        StringBuilder answer = new StringBuilder("Курс на поточну дату: " + currentDate);
+        answer.append("\n\n");
 
         if (checkSelectedBank(chatId).equals("Приват")) {
-            result = CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency());
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
         } else if (checkSelectedBank(chatId).equals("НБУ")) {
-            result = CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency());
-        } else {
-            result = CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency());
+            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
+        } else if (checkSelectedBank(chatId).equals("Mоно")) {
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
+        } else if (checkSelectedBank(chatId).equals("Всі банки")) {
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
+            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
         }
 
-        return result;
+        return answer.toString();
     }
 
     public static String toNumberFormat(long chatId){

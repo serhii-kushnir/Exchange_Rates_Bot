@@ -30,6 +30,7 @@ public class Buttons {
                         getUserSettingsById(chatId).getBank().equals("НБУ") ? "✅ НБУ" : "НБУ",
                         getUserSettingsById(chatId).getBank().equals("Приват") ? "✅ Приват" : "Приват",
                         getUserSettingsById(chatId).getBank().equals("Моно") ? "✅ Моно" : "Моно",
+                        getUserSettingsById(chatId).getBank().equals("Всі банки") ? "✅ Всі банки" : "Всі банки",
                         "\uD83D\uDD19 Назад"
                 });
     }
