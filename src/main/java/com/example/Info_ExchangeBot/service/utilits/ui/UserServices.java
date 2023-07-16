@@ -38,10 +38,29 @@ public class UserServices {
         return USERS_SETTINGS.get(chatId).getCurrency();
     }
 
-    public static String getCurrencyInformationFromSelectedBank(long chatId) {
-        var currentDate = LocalDate.now();
+    public static String getInformation(long chatId) {
+        LocalDate currentDate = LocalDate.now();
         StringBuilder answer = new StringBuilder("Курс на поточну дату: " + currentDate);
-        answer.append("\n\n");
+        answer.append("\n________________________________\n\n");
+
+        if (checkSelectedBank(chatId).equals("Всі банки") && checkSelectedCurrency(chatId).equals("USD") ||
+                checkSelectedBank(chatId).equals("Всі банки") && checkSelectedCurrency(chatId).equals("EUR")) {
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
+            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
+        } else if (checkSelectedBank(chatId).equals("Всі банки") && checkSelectedCurrency(chatId).equals("Всі валюти")) {
+
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
+
+            answer.append("________________________________\n\n");
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
+            answer.append("________________________________\n\n");
+
+            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
+            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
+        }
 
         if (checkSelectedBank(chatId).equals("Приват") && checkSelectedCurrency(chatId).equals("USD") ||
                 checkSelectedBank(chatId).equals("Приват") && checkSelectedCurrency(chatId).equals("EUR")) {
@@ -51,21 +70,28 @@ public class UserServices {
             answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
         }
 
-            if (checkSelectedBank(chatId).equals("НБУ")) {
+        if (checkSelectedBank(chatId).equals("НБУ") && checkSelectedCurrency(chatId).equals("USD") ||
+                checkSelectedBank(chatId).equals("НБУ") && checkSelectedCurrency(chatId).equals("EUR")) {
             answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
-        } else if (checkSelectedBank(chatId).equals("Моно")) {
-            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
-        } else if (checkSelectedBank(chatId).equals("Всі банки")) {
-            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
-            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
-            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
+        } else if (checkSelectedBank(chatId).equals("НБУ") && checkSelectedCurrency(chatId).equals("Всі валюти")) {
+            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
+            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
         }
+
+        if (checkSelectedBank(chatId).equals("Моно") && checkSelectedCurrency(chatId).equals("USD") ||
+                checkSelectedBank(chatId).equals("Моно") && checkSelectedCurrency(chatId).equals("EUR")) {
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
+        } else if (checkSelectedBank(chatId).equals("Моно") && checkSelectedCurrency(chatId).equals("Всі валюти")) {
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
+        }
+
 
         return answer.toString();
     }
 
     public static String toNumberFormat(long chatId){
-        String response = getCurrencyInformationFromSelectedBank(chatId);
+        String response = getInformation(chatId);
         String format = getFormat(chatId);
 
         DecimalFormat decimalFormat = new DecimalFormat(format);

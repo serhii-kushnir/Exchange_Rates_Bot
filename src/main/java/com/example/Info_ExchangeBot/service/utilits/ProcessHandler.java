@@ -37,6 +37,7 @@ public class ProcessHandler {
             case "Приват" -> botCommands.setPrivat(chatIdBackQuery, messageId);
             case "Моно" -> botCommands.setMono(chatIdBackQuery, messageId);
             case "НБУ" -> botCommands.setNBU(chatIdBackQuery, messageId);
+            case "Всі валюти" -> botCommands.setAllCurrency(chatIdBackQuery, messageId);
             case "Всі банки" -> botCommands.setAllBank(chatIdBackQuery, messageId);
             case "USD" -> botCommands.setUSD(chatIdBackQuery, messageId);
             case "EUR" -> botCommands.setEUR(chatIdBackQuery, messageId);

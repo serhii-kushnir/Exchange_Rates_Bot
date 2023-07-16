@@ -13,7 +13,7 @@ public class UserModel {
     private String EUR = "EUR";
 
     public UserModel() {
-        this.currency = "USD";
+        this.currency = "Всі валюти";
         this.bank = "Всі банки";
         this.number = "2";
         this.time = "Вимкнути сповіщення";
