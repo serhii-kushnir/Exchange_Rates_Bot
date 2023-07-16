@@ -9,8 +9,8 @@ public class UserModel {
     private String currency;
     private String time;
     private String number;
-    private String USD;
-    private String EUR;
+    private String USD = "USD";
+    private String EUR = "EUR";
 
     public UserModel() {
         this.currency = "USD";

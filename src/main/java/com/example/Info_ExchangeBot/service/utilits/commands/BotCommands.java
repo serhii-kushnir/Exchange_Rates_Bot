@@ -3,8 +3,8 @@ package com.example.Info_ExchangeBot.service.utilits.commands;
 import com.example.Info_ExchangeBot.service.TelegramBot;
 import com.example.Info_ExchangeBot.service.utilits.Buttons;
 import com.example.Info_ExchangeBot.service.utilits.Constants;
-import com.example.Info_ExchangeBot.service.utilits.EditMessage;
-import com.example.Info_ExchangeBot.service.utilits.MessageBuilder;
+import com.example.Info_ExchangeBot.service.message.EditMessage;
+import com.example.Info_ExchangeBot.service.message.CreateMessage;
 import com.example.Info_ExchangeBot.service.utilits.ui.UserServices;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
@@ -14,60 +14,60 @@ public class BotCommands {
 
     private final SendMessage sendMessage;
     private final EditMessage editMessage;
-    private final MessageBuilder messageBuilder;
+    private final CreateMessage messageBuilder;
 
     public BotCommands(TelegramBot telegramBot) {
         this.sendMessage = new SendMessage();
         this.editMessage = new EditMessage(telegramBot);
-        this.messageBuilder = new MessageBuilder(telegramBot);
+        this.messageBuilder = new CreateMessage(telegramBot);
     }
 
     public void start(long chatId) {
         UserServices.createUserSettings(chatId);
 
-        messageBuilder.sendMessage(chatId, "Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют!", Buttons.start());
+        messageBuilder.createMessage(chatId, "Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют!", Buttons.start());
     }
 
     public void home(long chatId) {
         UserServices.createUserSettings(chatId);
 
-        messageBuilder.sendMessage(chatId, "Ви повернулись на головне меню", Buttons.start());
+        messageBuilder.createMessage(chatId, "Ви повернулись на головне меню", Buttons.start());
     }
 
     public void infoMessage(long chatId) {
         UserServices.createUserSettings(chatId);
 
-        messageBuilder.sendMessage(chatId, UserServices.toNumberFormat(chatId), Buttons.info());
+        messageBuilder.createMessage(chatId, UserServices.toNumberFormat(chatId), Buttons.info());
     }
 
     public void settingsMessage(long chatId) {
         UserServices.createUserSettings(chatId);
 
-        messageBuilder.sendMessage(chatId, "Налаштування", Buttons.setting());
+        messageBuilder.createMessage(chatId, "Налаштування", Buttons.setting());
     }
 
     public void numberSettings(long chatId) {
         UserServices.createUserSettings(chatId);
 
-        messageBuilder.sendMessage(chatId, Constants.NUMBER, Buttons.number(chatId));
+        messageBuilder.createMessage(chatId, Constants.NUMBER, Buttons.number(chatId));
     }
 
     public void currencySettings(long chatId) {
         UserServices.createUserSettings(chatId);
 
-        messageBuilder.sendMessage(chatId, Constants.CURRENCY, Buttons.currency(chatId));
+        messageBuilder.createMessage(chatId, Constants.CURRENCY, Buttons.currency(chatId));
     }
 
     public void bankSettings(long chatId) {
         UserServices.createUserSettings(chatId);
 
-        messageBuilder.sendMessage(chatId, Constants.BANK, Buttons.bank(chatId));
+        messageBuilder.createMessage(chatId, Constants.BANK, Buttons.bank(chatId));
     }
 
     public void timeSettings(long chatId) {
         UserServices.createUserSettings(chatId);
 
-        messageBuilder.sendMessage(chatId, Constants.TIME, Buttons.time(chatId));
+        messageBuilder.createMessage(chatId, Constants.TIME, Buttons.time(chatId));
     }
 
 
@@ -78,63 +78,70 @@ public class BotCommands {
         sendMessage.setChatId(chatId);
         getUserSettingsById(chatId).setNumber("2");
 
-        editMessage.executeEditMessageText(Constants.NUMBER, chatId, messageId, Buttons.number(chatId));
+        editMessage.editMessage(Constants.NUMBER, chatId, messageId, Buttons.number(chatId));
     }
 
     public void setThreeNumbers(long chatId, long messageId){
         sendMessage.setChatId(chatId);
         getUserSettingsById(chatId).setNumber("3");
 
-        editMessage.executeEditMessageText(Constants.NUMBER, chatId, messageId, Buttons.number(chatId));
+        editMessage.editMessage(Constants.NUMBER, chatId, messageId, Buttons.number(chatId));
     }
 
     public void setFourNumbers(long chatId, long messageId){
         sendMessage.setChatId(chatId);
         getUserSettingsById(chatId).setNumber("4");
 
-        editMessage.executeEditMessageText(Constants.NUMBER, chatId, messageId, Buttons.number(chatId));
+        editMessage.editMessage(Constants.NUMBER, chatId, messageId, Buttons.number(chatId));
     }
 
     public void setUSD(long chatId, long messageId) {
         sendMessage.setChatId(chatId);
         getUserSettingsById(chatId).setCurrency("USD");
 
-        editMessage.executeEditMessageText(Constants.CURRENCY, chatId, messageId, Buttons.currency(chatId));
+        editMessage.editMessage(Constants.CURRENCY, chatId, messageId, Buttons.currency(chatId));
     }
 
     public void setEUR(long chatId, long messageId) {
         sendMessage.setChatId(chatId);
         getUserSettingsById(chatId).setCurrency("EUR");
 
-        editMessage.executeEditMessageText(Constants.CURRENCY, chatId, messageId, Buttons.currency(chatId));
+        editMessage.editMessage(Constants.CURRENCY, chatId, messageId, Buttons.currency(chatId));
+    }
+
+    public void setAllCurrency(long chatId, long messageId) {
+        sendMessage.setChatId(chatId);
+        getUserSettingsById(chatId).setCurrency("Всі банки");
+
+        editMessage.editMessage(Constants.CURRENCY, chatId, messageId, Buttons.currency(chatId));
     }
 
     public void setMono(long chatId, long messageId) {
         sendMessage.setChatId(chatId);
         getUserSettingsById(chatId).setBank("Моно");
 
-        editMessage.executeEditMessageText(Constants.BANK, chatId, messageId, Buttons.bank(chatId));
+        editMessage.editMessage(Constants.BANK, chatId, messageId, Buttons.bank(chatId));
     }
 
     public void setPrivat(long chatId, long messageId) {
         sendMessage.setChatId(chatId);
         getUserSettingsById(chatId).setBank("Приват");
 
-        editMessage.executeEditMessageText(Constants.BANK, chatId, messageId, Buttons.bank(chatId));
+        editMessage.editMessage(Constants.BANK, chatId, messageId, Buttons.bank(chatId));
     }
 
     public void setNBU(long chatId, long messageId) {
         sendMessage.setChatId(chatId);
         getUserSettingsById(chatId).setBank("НБУ");
 
-        editMessage.executeEditMessageText(Constants.BANK, chatId, messageId, Buttons.bank(chatId));
+        editMessage.editMessage(Constants.BANK, chatId, messageId, Buttons.bank(chatId));
     }
 
     public void setAllBank(long chatId, long messageId) {
         sendMessage.setChatId(chatId);
         getUserSettingsById(chatId).setBank("Всі банки");
 
-        editMessage.executeEditMessageText(Constants.BANK, chatId, messageId, Buttons.bank(chatId));
+        editMessage.editMessage(Constants.BANK, chatId, messageId, Buttons.bank(chatId));
     }
 //
 //    public void setTime9(long chatId, long messageId){

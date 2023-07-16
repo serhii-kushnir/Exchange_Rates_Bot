@@ -40,6 +40,7 @@ public class Buttons {
                 new String[]{
                         getUserSettingsById(chatId).getCurrency().equals("USD") ? "✅ USD" : "USD",
                         getUserSettingsById(chatId).getCurrency().equals("EUR") ? "✅ EUR" : "EUR",
+                        getUserSettingsById(chatId).getCurrency().equals("Всі валюти") ? "✅ Всі валюти" : "Всі валюти",
                         "\uD83D\uDD19 Назад"
                 });
     }

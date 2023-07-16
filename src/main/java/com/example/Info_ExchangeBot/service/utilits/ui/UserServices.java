@@ -34,15 +34,21 @@ public class UserServices {
          return USERS_SETTINGS.get(chatId).getBank();
     }
 
+    public static String checkSelectedCurrency(long chatId) {
+        return USERS_SETTINGS.get(chatId).getCurrency();
+    }
+
     public static String getCurrencyInformationFromSelectedBank(long chatId) {
         var currentDate = LocalDate.now();
         StringBuilder answer = new StringBuilder("Курс на поточну дату: " + currentDate);
         answer.append("\n\n");
 
-        if (checkSelectedBank(chatId).equals("Приват")) {
+        if (checkSelectedBank(chatId).equals("Приват") && checkSelectedCurrency(chatId).equals("USD") ||
+                checkSelectedBank(chatId).equals("Приват") && checkSelectedCurrency(chatId).equals("EUR")) {
             answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
-        } else if (checkSelectedBank(chatId).equals("Приват")) {
-            
+        } else if (checkSelectedBank(chatId).equals("Приват") && checkSelectedCurrency(chatId).equals("Всі валюти")) {
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
         }
 
             if (checkSelectedBank(chatId).equals("НБУ")) {
