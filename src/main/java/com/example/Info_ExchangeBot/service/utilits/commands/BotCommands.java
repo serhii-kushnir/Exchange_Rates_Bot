@@ -34,8 +34,9 @@ public class BotCommands {
     public void infoMessage(long chatId) {
         UserServices.createUserSettings(chatId);
 
-        UserServices.getInformation(chatId);
-        //messageBuilder.createMessage(chatId, UserServices.toNumberFormat(chatId), Buttons.info());
+//        UserServices.getInformation(chatId);
+        messageBuilder.createMessage(chatId, UserServices.toNumberFormat(chatId), Buttons.info());
+//        messageBuilder.createMessage(chatId, UserServices.getInformation(chatId), Buttons.info());
     }
 
     public void settingsMessage(long chatId) {
