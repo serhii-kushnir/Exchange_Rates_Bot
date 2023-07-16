@@ -12,14 +12,34 @@ public class Log {
    private static final File FILE = new File("log.txt");
 
     public static void Error(TelegramApiException e) {
-        System.out.println("\nLOG.ERROR: " + new Timestamp(System.currentTimeMillis()) +
-                "\nError occurred: " + e.getMessage() + "\n");
+        String logText ="\nLOG.ERROR: " + new Timestamp(System.currentTimeMillis()) +
+                "\nError occurred: " + e.getMessage() + "\n";
+
+        System.out.println(logText);
+
+        try (FileWriter writer = new FileWriter(FILE, true))
+        {
+            writer.write(logText);
+            writer.flush();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public static void Info(String name, String text) {
-        System.out.println("\nLOG.INFO: " + new Timestamp(System.currentTimeMillis()) +
+        String logText = "\nLOG.INFO: " + new Timestamp(System.currentTimeMillis()) +
                 "\nReply to username: " + name + "\n" +
-                "using text: " + text + "\n");
+                "using text: " + text + "\n";
+
+        System.out.println(logText);
+
+        try (FileWriter writer = new FileWriter(FILE, true))
+        {
+            writer.write(logText);
+            writer.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void button(String name, String callbackData) {
