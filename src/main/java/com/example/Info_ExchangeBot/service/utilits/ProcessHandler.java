@@ -14,6 +14,7 @@ public class ProcessHandler {
     public void message(String messageText, String username, long chatId) {
         switch (messageText) {
             case "/start" -> botCommands.start(chatId);
+            case "/home" -> botCommands.home(chatId);
             case "/info" -> botCommands.infoMessage(chatId);
             case "/setting" -> botCommands.settingsMessage(chatId);
             case "/bank" -> botCommands.bankSettings(chatId);

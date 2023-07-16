@@ -29,32 +29,50 @@ public class BotCommands {
     }
 
     public void home(long chatId) {
+        UserServices.createUserSettings(chatId);
+
         messageBuilder.sendMessage(chatId, "Ви повернулись на головне меню", Buttons.start());
     }
 
     public void infoMessage(long chatId) {
+        UserServices.createUserSettings(chatId);
+
         messageBuilder.sendMessage(chatId, UserServices.toNumberFormat(chatId), Buttons.info());
     }
 
     public void settingsMessage(long chatId) {
+        UserServices.createUserSettings(chatId);
+
         messageBuilder.sendMessage(chatId, "Налаштування", Buttons.setting());
     }
 
     public void numberSettings(long chatId) {
+        UserServices.createUserSettings(chatId);
+
         messageBuilder.sendMessage(chatId, Constants.NUMBER, Buttons.number(chatId));
     }
 
     public void currencySettings(long chatId) {
+        UserServices.createUserSettings(chatId);
+
         messageBuilder.sendMessage(chatId, Constants.CURRENCY, Buttons.currency(chatId));
     }
 
     public void bankSettings(long chatId) {
+        UserServices.createUserSettings(chatId);
+
         messageBuilder.sendMessage(chatId, Constants.BANK, Buttons.bank(chatId));
     }
 
     public void timeSettings(long chatId) {
+        UserServices.createUserSettings(chatId);
+
         messageBuilder.sendMessage(chatId, Constants.TIME, Buttons.time(chatId));
     }
+
+
+
+
 
     public void setTwoNumbers(long chatId, long messageId){
         sendMessage.setChatId(chatId);

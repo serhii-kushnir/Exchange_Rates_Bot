@@ -9,8 +9,8 @@ public class BotCommandListMenu {
 
     public static List<BotCommand> getBotCommandList() {
         return Arrays.asList(
-                new BotCommand("/start", "Запустити бота"),
-                new BotCommand("/info", "отримати інфо"),
+                new BotCommand("/home", "Повернутися на головну сторінку"),
+                new BotCommand("/info", "Отримати курси валют"),
                 new BotCommand("/setting", "Налаштуавння"),
                 new BotCommand("/bank", "Налаштуавння банку"),
                 new BotCommand("/currency", "Налаштуавння валюти"),
