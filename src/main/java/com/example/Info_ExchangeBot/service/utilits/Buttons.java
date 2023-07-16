@@ -57,9 +57,10 @@ public class Buttons {
     public static InlineKeyboardMarkup setting() {
         return InlineKeyboardMarkupBuilder.buildMarkup(
                 new String[]{
-                        "\uD83C\uDFE6 Банк", "\uD83D\uDCB5 Валюта", "\uD83D\uDD52 Час сповіщень",
-                        "\uD83D\uDD22 Кількість знаків після коми", "\uD83C\uDFE0 На головну"
-                });
+                        "\uD83C\uDFE6 Банк", "\uD83D\uDCB5 Валюта",
+                        "\uD83D\uDD22 Кількість знаків після коми",
+                        "\uD83C\uDFE0 На головну"
+                }); //"\uD83D\uDD52 Час сповіщень"
     }
 
     public static InlineKeyboardMarkup info() {
@@ -69,6 +70,6 @@ public class Buttons {
 
     public static InlineKeyboardMarkup start() {
         return InlineKeyboardMarkupBuilder.buildMarkup(
-                new String[]{"\uD83D\uDCB1 Отримати інфо", "⚙ Налаштування"});
+                new String[]{"\uD83D\uDCB1 Отримати курси валют", "⚙ Налаштування"});
     }
 }

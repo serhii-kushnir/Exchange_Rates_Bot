@@ -13,7 +13,7 @@ public class InlineKeyboardMarkupBuilder {
         for (String buttonText : buttonTexts) {
             InlineKeyboardButton button = new InlineKeyboardButton();
             button.setText(buttonText);
-            button.setCallbackData(buttonText.toUpperCase());
+            button.setCallbackData(buttonText);
             keyboard.add(List.of(button));
         }
 

@@ -37,6 +37,14 @@ public class CurrencyServicePrivatBank {
     }
 
     public static String getCurrencyInformation(String currency) {
+        return getInfo(currency);
+    }
+
+    public static String getCurrencyInformation(String currency, String currencyTwo) {
+        return getInfo(currency) + getInfo(currencyTwo);
+    }
+
+    private static String getInfo(String currency) {
         List<CurrencyModelPrivatBank> currencyList = getCurrencyRate();
         StringBuilder result = new StringBuilder();
 
@@ -57,5 +65,5 @@ public class CurrencyServicePrivatBank {
         }
 
         return result.toString();
-    }
+    };
 }

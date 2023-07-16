@@ -27,16 +27,16 @@ public class ProcessHandler {
 
     public void callbackQuery(String callbackData, String userName, long chatIdBackQuery, long messageId) {
         switch (callbackData) {
-            case "\uD83D\uDCB1 ОТРИМАТИ ІНФО" -> botCommands.infoMessage(chatIdBackQuery);
-            case "⚙ НАЛАШТУВАННЯ", "\uD83D\uDD19 НАЗАД" -> botCommands.settingsMessage(chatIdBackQuery);
-            case "\uD83D\uDD22 КІЛЬКІСТЬ ЗНАКІВ ПІСЛЯ КОМИ" -> botCommands.numberSettings(chatIdBackQuery);
-            case "\uD83D\uDCB5 ВАЛЮТА" -> botCommands.currencySettings(chatIdBackQuery);
-            case "\uD83C\uDFE6 БАНК" -> botCommands.bankSettings(chatIdBackQuery);
-            case "\uD83D\uDD52 ЧАС СПОВІЩЕНЬ" -> botCommands.timeSettings(chatIdBackQuery);
-            case "ПРИВАТ" -> botCommands.setPrivat(chatIdBackQuery, messageId);
-            case "МОНО" -> botCommands.setMono(chatIdBackQuery, messageId);
+            case "\uD83D\uDCB1 Отримати курси валют" -> botCommands.infoMessage(chatIdBackQuery);
+            case "⚙ Налаштування", "\uD83D\uDD19 Назад" -> botCommands.settingsMessage(chatIdBackQuery);
+            case "\uD83D\uDD22 Кількість знаків після коми" -> botCommands.numberSettings(chatIdBackQuery);
+            case "\uD83D\uDCB5 Валюта" -> botCommands.currencySettings(chatIdBackQuery);
+            case "\uD83C\uDFE6 Банк" -> botCommands.bankSettings(chatIdBackQuery);
+            case "\uD83D\uDD52 Час сповіщення" -> botCommands.timeSettings(chatIdBackQuery);
+            case "Приват" -> botCommands.setPrivat(chatIdBackQuery, messageId);
+            case "Моно" -> botCommands.setMono(chatIdBackQuery, messageId);
             case "НБУ" -> botCommands.setNBU(chatIdBackQuery, messageId);
-            case "ВСІ БАНКИ" -> botCommands.setAllBank(chatIdBackQuery, messageId);
+            case "Всі банки" -> botCommands.setAllBank(chatIdBackQuery, messageId);
             case "USD" -> botCommands.setUSD(chatIdBackQuery, messageId);
             case "EUR" -> botCommands.setEUR(chatIdBackQuery, messageId);
             case "2" -> botCommands.setTwoNumbers(chatIdBackQuery, messageId);
@@ -53,7 +53,7 @@ public class ProcessHandler {
 //            case "17:00" -> botCommands.setTime17(chatIdBackQuery, messageId);
 //            case "18:00" -> botCommands.setTime18(chatIdBackQuery, messageId);
 //            case "ВИМКНУТИ СПОВІЩЕННЯ" -> botCommands.setTimeOff(chatIdBackQuery, messageId);
-            case "\uD83C\uDFE0 НА ГОЛОВНУ" -> botCommands.home(chatIdBackQuery);
+            case "\uD83C\uDFE0 На головну" -> botCommands.home(chatIdBackQuery);
         }
 
         Log.button( userName, callbackData);

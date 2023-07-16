@@ -14,7 +14,7 @@ public class BotCommandListMenu {
                 new BotCommand("/setting", "Налаштуавння"),
                 new BotCommand("/bank", "Налаштуавння банку"),
                 new BotCommand("/currency", "Налаштуавння валюти"),
-                new BotCommand("/time", "Налаштуавння сповіщення"),
+                //new BotCommand("/time", "Налаштуавння сповіщення"),
                 new BotCommand("/number", "Налаштуавння знаків")
         );
     }

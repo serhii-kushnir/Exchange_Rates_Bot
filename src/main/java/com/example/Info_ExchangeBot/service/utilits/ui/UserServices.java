@@ -41,7 +41,11 @@ public class UserServices {
 
         if (checkSelectedBank(chatId).equals("Приват")) {
             answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
-        } else if (checkSelectedBank(chatId).equals("НБУ")) {
+        } else if (checkSelectedBank(chatId).equals("Приват")) {
+            
+        }
+
+            if (checkSelectedBank(chatId).equals("НБУ")) {
             answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
         } else if (checkSelectedBank(chatId).equals("Моно")) {
             answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
