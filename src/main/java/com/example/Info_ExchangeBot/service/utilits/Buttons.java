@@ -1,7 +1,7 @@
 package com.example.Info_ExchangeBot.service.utilits;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import static com.example.Info_ExchangeBot.service.utilits.ui.UserServices.getUserSettingsById;
+import static com.example.Info_ExchangeBot.service.ui.UserServices.getUserSettingsById;
 
 public class Buttons {
 

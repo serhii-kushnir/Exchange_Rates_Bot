@@ -1,8 +1,11 @@
-package com.example.Info_ExchangeBot.service.utilits.ui;
+package com.example.Info_ExchangeBot.service.ui;
 
 import com.example.Info_ExchangeBot.banks.monobank.CurrencyServiceMonoBank;
 import com.example.Info_ExchangeBot.banks.nbu.CurrencyServiceNBU;
 import com.example.Info_ExchangeBot.banks.privatbank.CurrencyServicePrivatBank;
+import com.example.Info_ExchangeBot.service.TelegramBot;
+import com.example.Info_ExchangeBot.service.utilits.Buttons;
+import com.example.Info_ExchangeBot.service.utilits.MessageBuilder;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -41,7 +44,7 @@ public class UserServices {
     public static String getInformation(long chatId) {
         LocalDate currentDate = LocalDate.now();
         StringBuilder answer = new StringBuilder("Курс на поточну дату: " + currentDate);
-        answer.append("\n________________________________\n\n");
+        answer.append("\n__________________________________\n\n");
 
         if (checkSelectedBank(chatId).equals("Всі банки") && checkSelectedCurrency(chatId).equals("USD") ||
                 checkSelectedBank(chatId).equals("Всі банки") && checkSelectedCurrency(chatId).equals("EUR")) {
@@ -53,10 +56,10 @@ public class UserServices {
             answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
             answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
 
-            answer.append("________________________________\n\n");
+            answer.append("__________________________________\n\n");
             answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
             answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
-            answer.append("________________________________\n\n");
+            answer.append("__________________________________\n\n");
 
             answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
             answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));

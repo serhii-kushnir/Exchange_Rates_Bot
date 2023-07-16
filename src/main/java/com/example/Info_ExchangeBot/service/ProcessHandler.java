@@ -1,6 +1,7 @@
-package com.example.Info_ExchangeBot.service.utilits;
+package com.example.Info_ExchangeBot.service;
 
 import com.example.Info_ExchangeBot.service.TelegramBot;
+import com.example.Info_ExchangeBot.service.utilits.Log;
 import com.example.Info_ExchangeBot.service.utilits.commands.BotCommands;
 
 public class ProcessHandler {

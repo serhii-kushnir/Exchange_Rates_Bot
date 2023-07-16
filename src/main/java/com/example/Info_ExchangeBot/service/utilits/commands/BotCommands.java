@@ -1,13 +1,13 @@
 package com.example.Info_ExchangeBot.service.utilits.commands;
 
-import com.example.Info_ExchangeBot.service.MessageBuilder;
+import com.example.Info_ExchangeBot.service.utilits.MessageBuilder;
 import com.example.Info_ExchangeBot.service.TelegramBot;
 import com.example.Info_ExchangeBot.service.utilits.Buttons;
 import com.example.Info_ExchangeBot.service.utilits.Constants;
-import com.example.Info_ExchangeBot.service.utilits.ui.UserServices;
+import com.example.Info_ExchangeBot.service.ui.UserServices;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
-import static com.example.Info_ExchangeBot.service.utilits.ui.UserServices.getUserSettingsById;
+import static com.example.Info_ExchangeBot.service.ui.UserServices.getUserSettingsById;
 
 public class BotCommands {
 

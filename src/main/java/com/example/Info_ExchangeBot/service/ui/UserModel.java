@@ -1,4 +1,4 @@
-package com.example.Info_ExchangeBot.service.utilits.ui;
+package com.example.Info_ExchangeBot.service.ui;
 
 import lombok.Data;
 

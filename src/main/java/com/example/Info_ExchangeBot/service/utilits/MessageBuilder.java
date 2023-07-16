@@ -1,5 +1,6 @@
-package com.example.Info_ExchangeBot.service;
+package com.example.Info_ExchangeBot.service.utilits;
 
+import com.example.Info_ExchangeBot.service.TelegramBot;
 import com.example.Info_ExchangeBot.service.utilits.Log;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
