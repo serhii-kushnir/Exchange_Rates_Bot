@@ -22,7 +22,7 @@ public class CurrencyServiceMonoBank {
     public static List<CurrencyModelMonoBank> getCurrencyRate() {
         long currentTime = System.currentTimeMillis();
 
-        if (lastCurrencyList != null && (currentTime - lastUpdateTime) < (300000)) {
+        if (lastCurrencyList != null && (currentTime - lastUpdateTime) < (600000)) {
             return lastCurrencyList;
         }
 
