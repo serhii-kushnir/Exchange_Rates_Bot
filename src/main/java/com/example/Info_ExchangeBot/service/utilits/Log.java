@@ -5,11 +5,32 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class Log {
 
-   private static final File FILE = new File("log.txt");
+    private static final LocalDate CURRENT_DATE = LocalDate.now();
+    private static final String DIRECTORY_PATH = "log";
+    private static final String FILE_PATH = DIRECTORY_PATH + File.separator + CURRENT_DATE + ".txt";
+
+    static {
+        createDirectory();
+    }
+
+    private static void createDirectory() {
+        Path directoryPath = Paths.get(DIRECTORY_PATH);
+        if (!Files.exists(directoryPath)) {
+            try {
+                Files.createDirectories(directoryPath);
+            } catch (IOException e) {
+                System.out.println("Failed to create log directory: " + e.getMessage());
+            }
+        }
+    }
 
     public static void Error(TelegramApiException e) {
         String logText ="\nLOG.ERROR: " + new Timestamp(System.currentTimeMillis()) +
@@ -17,12 +38,11 @@ public class Log {
 
         System.out.println(logText);
 
-        try (FileWriter writer = new FileWriter(FILE, true))
-        {
+        try (FileWriter writer = new FileWriter(FILE_PATH, true)) {
             writer.write(logText);
             writer.flush();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Failed to write to log file: " + ex.getMessage());
         }
     }
 
@@ -33,12 +53,11 @@ public class Log {
 
         System.out.println(logText);
 
-        try (FileWriter writer = new FileWriter(FILE, true))
-        {
+        try (FileWriter writer = new FileWriter(FILE_PATH, true)) {
             writer.write(logText);
             writer.flush();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Failed to write to log file: " + e.getMessage());
         }
     }
 
@@ -49,12 +68,11 @@ public class Log {
 
         System.out.println(logText);
 
-        try (FileWriter writer = new FileWriter(FILE, true))
-        {
+        try (FileWriter writer = new FileWriter(FILE_PATH, true)) {
             writer.write(logText);
             writer.flush();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Failed to write to log file: " + e.getMessage());
         }
     }
 }
