@@ -32,7 +32,20 @@ public class Log {
         }
     }
 
+    private static void createLogFile() {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Failed to create log file: " + e.getMessage());
+            }
+        }
+    }
+
     public static void Error(TelegramApiException e) {
+        createLogFile();
+
         String logText ="\nLOG.ERROR: " + new Timestamp(System.currentTimeMillis()) +
                 "\nError occurred: " + e.getMessage() + "\n";
 
@@ -47,6 +60,8 @@ public class Log {
     }
 
     public static void Info(String name, String text) {
+        createLogFile();
+
         String logText = "\nLOG.INFO: " + new Timestamp(System.currentTimeMillis()) +
                 "\nReply to username: " + name + "\n" +
                 "using text: " + text + "\n";
@@ -62,6 +77,8 @@ public class Log {
     }
 
     public static void button(String name, String callbackData) {
+        createLogFile();
+
         String logText = "\nLOG.INFO: " + new Timestamp(System.currentTimeMillis()) +
                 "\nReply to username: " + name +  "\n" +
                 "using button: " + callbackData +  "\n";
