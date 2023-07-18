@@ -3,9 +3,6 @@ package com.example.Info_ExchangeBot.service.ui;
 import com.example.Info_ExchangeBot.banks.monobank.CurrencyServiceMonoBank;
 import com.example.Info_ExchangeBot.banks.nbu.CurrencyServiceNBU;
 import com.example.Info_ExchangeBot.banks.privatbank.CurrencyServicePrivatBank;
-import com.example.Info_ExchangeBot.service.TelegramBot;
-import com.example.Info_ExchangeBot.service.utilits.Buttons;
-import com.example.Info_ExchangeBot.service.utilits.MessageBuilder;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
