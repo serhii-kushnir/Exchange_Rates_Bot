@@ -83,7 +83,7 @@ public class UserServices {
 
         if (checkSelectedBank(chatId).equals("Моно") && checkSelectedCurrency(chatId).equals("USD") ||
                 checkSelectedBank(chatId).equals("Моно") && checkSelectedCurrency(chatId).equals("EUR")) {
-            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
         } else if (checkSelectedBank(chatId).equals("Моно") && checkSelectedCurrency(chatId).equals("Всі валюти")) {
             answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
             answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
