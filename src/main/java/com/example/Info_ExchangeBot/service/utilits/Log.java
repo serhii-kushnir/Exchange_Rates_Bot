@@ -36,9 +36,14 @@ public class Log {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
             try {
-                file.createNewFile();
+                boolean created = file.createNewFile();
+                if (created) {
+                    System.out.println("Log file created: " + file.getAbsolutePath());
+                } else {
+                    System.out.println("Failed to create log file: " + file.getAbsolutePath());
+                }
             } catch (IOException e) {
-                System.out.println("Failed to create log file: " + e.getMessage());
+                System.out.println("Error creating log file: " + e.getMessage());
             }
         }
     }
