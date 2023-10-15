@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 import static info_exchange_bot.service.utilits.Constants.ERROR_FILED;
 
-public class Log {
+public final class Log {
 
     private static final LocalDate CURRENT_DATE = LocalDate.now();
     private static final String DIRECTORY_PATH = "log";
@@ -40,9 +40,9 @@ public class Log {
         }
     }
 
-    public static void error(TelegramApiException e) {
-        String logText ="\nLOG.ERROR: " + new Timestamp(System.currentTimeMillis()) +
-                "\nError occurred: " + e.getMessage() + "\n";
+    public static void error(final TelegramApiException e) {
+        String logText = "\nLOG.ERROR: " + new Timestamp(System.currentTimeMillis())
+                + "\nError occurred: " + e.getMessage() + "\n";
 
         System.out.println(logText);
 
@@ -54,10 +54,10 @@ public class Log {
         }
     }
 
-    public static void info(String name, String text) {
-        String logText = "\nLOG.INFO: " + new Timestamp(System.currentTimeMillis()) +
-                "\nReply to username: " + name + "\n" +
-                "using text: " + text + "\n";
+    public static void info(final String name, final String text) {
+        String logText = "\nLOG.INFO: " + new Timestamp(System.currentTimeMillis())
+                + "\nReply to username: " + name + "\n"
+                + "using text: " + text + "\n";
 
         System.out.println(logText);
 
@@ -69,10 +69,10 @@ public class Log {
         }
     }
 
-    public static void button(String name, String callbackData) {
-        String logText = "\nLOG.INFO: " + new Timestamp(System.currentTimeMillis()) +
-                "\nReply to username: " + name +  "\n" +
-                "using button: " + callbackData +  "\n";
+    public static void button(final String name, final String callbackData) {
+        String logText = "\nLOG.INFO: " + new Timestamp(System.currentTimeMillis())
+                + "\nReply to username: " + name +  "\n"
+                + "using button: " + callbackData +  "\n";
 
         System.out.println(logText);
 

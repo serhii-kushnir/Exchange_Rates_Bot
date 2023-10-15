@@ -6,12 +6,12 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 
 import static info_exchange_bot.service.ui.UserServices.getUserSettingsById;
 
-public class Buttons {
+public final class Buttons {
 
     private Buttons() {
     }
 
-    public static InlineKeyboardMarkup time(long chatId) {
+    public static InlineKeyboardMarkup time(final long chatId) {
         return InlineKeyboardMarkupBuilder.buildMarkup(
                 new String[]{
                         getUserSettingsById(chatId).getTime().equals("09:00") ? "✅ 09:00" : "09:00",
@@ -24,13 +24,13 @@ public class Buttons {
                         getUserSettingsById(chatId).getTime().equals("16:00") ? "✅ 16:00" : "16:00",
                         getUserSettingsById(chatId).getTime().equals("17:00") ? "✅ 17:00" : "17:00",
                         getUserSettingsById(chatId).getTime().equals("18:00") ? "✅ 18:00" : "18:00",
-                        getUserSettingsById(chatId).getTime().equals("Вимкнути сповіщення") ?
-                                "✅ Вимкнути сповіщення" : "Вимкнути сповіщення",
+                        getUserSettingsById(chatId).getTime().equals("Вимкнути сповіщення")
+                                ? "✅ Вимкнути сповіщення" : "Вимкнути сповіщення",
                         BACK
                 });
     }
 
-    public static InlineKeyboardMarkup bank(long chatId) {
+    public static InlineKeyboardMarkup bank(final long chatId) {
         return InlineKeyboardMarkupBuilder.buildMarkup(
                 new String[]{
                         getUserSettingsById(chatId).getBank().equals("НБУ") ? "✅ НБУ" : "НБУ",
@@ -41,7 +41,7 @@ public class Buttons {
                 });
     }
 
-    public static InlineKeyboardMarkup currency(long chatId) {
+    public static InlineKeyboardMarkup currency(final long chatId) {
         return InlineKeyboardMarkupBuilder.buildMarkup(
                 new String[]{
                         getUserSettingsById(chatId).getCurrency().equals("USD") ? "✅ USD" : "USD",
@@ -51,7 +51,7 @@ public class Buttons {
                 });
     }
 
-    public static InlineKeyboardMarkup number(long chatId) {
+    public static InlineKeyboardMarkup number(final long chatId) {
         return InlineKeyboardMarkupBuilder.buildMarkup(
                 new String[]{
                         getUserSettingsById(chatId).getNumber().equals("2") ? "✅ 2" : "2",

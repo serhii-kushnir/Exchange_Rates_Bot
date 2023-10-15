@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CurrencyServiceNBU {
-    private static final Logger logger = Logger.getLogger(CurrencyServiceNBU.class.getName());
+public final class CurrencyServiceNBU {
+    private static final Logger LOGGER = Logger.getLogger(CurrencyServiceNBU.class.getName());
     private static final String BASE_URL = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
     private static final Gson GSON = new Gson();
     private static final HttpClient HTTP_CLIENT = HttpClients.createDefault();
@@ -35,16 +35,16 @@ public class CurrencyServiceNBU {
             if (statusCode == HttpStatus.SC_OK) {
                 String responseBody = EntityUtils.toString(response.getEntity());
 
-                return  GSON.fromJson(responseBody, new TypeToken<List<CurrencyModelNBU>>() {}.getType());
+                return  GSON.fromJson(responseBody, new TypeToken<List<CurrencyModelNBU>>() { }.getType());
             }
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Failed to fetch currency rate from MonoBank API", e);
+            LOGGER.log(Level.SEVERE, "Failed to fetch currency rate from MonoBank API", e);
         }
 
         return null;
     }
 
-    public static String getCurrencyInformation(String currency) {
+    public static String getCurrencyInformation(final String currency) {
         List<CurrencyModelNBU> currencyList = getCurrencyRate();
         StringBuilder result = new StringBuilder();
 

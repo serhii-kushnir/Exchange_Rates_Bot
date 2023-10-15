@@ -5,7 +5,7 @@ import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import java.util.Arrays;
 import java.util.List;
 
-public class BotCommandListMenu {
+public final class BotCommandListMenu {
 
     private BotCommandListMenu() {
     }

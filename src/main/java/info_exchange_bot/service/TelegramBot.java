@@ -17,12 +17,12 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.List;
 
 @Component
-public class TelegramBot extends TelegramLongPollingBot {
+public final class TelegramBot extends TelegramLongPollingBot {
 
     private final BotConfig config;
     private final ProcessHandler processHandler;
 
-    public TelegramBot(BotConfig config) {
+    public TelegramBot(final BotConfig config) {
         this.config = config;
         this.processHandler = new ProcessHandler(this);
         List<BotCommand> botCommandList = BotCommandListMenu.getBotCommandList();
@@ -45,7 +45,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     @Override
-    public void onUpdateReceived(Update update) {
+    public void onUpdateReceived(final Update update) {
         long chatId;
         long messageId;
         String userName;
@@ -69,7 +69,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    public void executeMessage(SendMessage message) {
+    public void executeMessage(final SendMessage message) {
         try {
             execute(message);
         } catch (TelegramApiException e) {

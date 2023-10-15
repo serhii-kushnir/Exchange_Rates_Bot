@@ -7,17 +7,17 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class MessageBuilder {
+public final class MessageBuilder {
 
     private final SendMessage sendMessage;
     private final TelegramBot telegramBot;
 
-    public MessageBuilder(TelegramBot telegramBot) {
+    public MessageBuilder(final TelegramBot telegramBot) {
         this.sendMessage = new SendMessage();
         this.telegramBot = telegramBot;
     }
 
-    public void createMessage(long chatId, String answer, InlineKeyboardMarkup button) {
+    public void createMessage(final long chatId, final String answer, final InlineKeyboardMarkup button) {
         sendMessage.setChatId(chatId);
         sendMessage.setText(answer);
 
@@ -26,7 +26,7 @@ public class MessageBuilder {
         telegramBot.executeMessage(sendMessage);
     }
 
-    public void editMessage(String text, long chatId, long messageId, InlineKeyboardMarkup button){
+    public void editMessage(final String text, final long chatId, final long messageId, final InlineKeyboardMarkup button) {
         EditMessageText message = new EditMessageText();
         message.setChatId(String.valueOf(chatId));
         message.setText(text);

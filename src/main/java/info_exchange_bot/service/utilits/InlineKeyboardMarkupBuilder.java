@@ -6,12 +6,12 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
-public class InlineKeyboardMarkupBuilder {
+public final class InlineKeyboardMarkupBuilder {
 
     private InlineKeyboardMarkupBuilder() {
     }
 
-    public static InlineKeyboardMarkup buildMarkup(String[] buttonTexts) {
+    public static InlineKeyboardMarkup buildMarkup(final String[] buttonTexts) {
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
 
         for (String buttonText : buttonTexts) {

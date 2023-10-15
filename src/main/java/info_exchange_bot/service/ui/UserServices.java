@@ -61,40 +61,40 @@ public class UserServices {
             answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
         } else if (checkSelectedBank(chatId).equals(ALL_BANKS) && checkSelectedCurrency(chatId).equals(ALL_CURRENCIES)) {
 
-            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
-            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUsd()));
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEur()));
 
             answer.append("__________________________________\n\n");
-            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
-            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUsd()));
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEur()));
             answer.append("__________________________________\n\n");
 
-            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
-            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
+            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUsd()));
+            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEur()));
         }
 
         if (checkSelectedBank(chatId).equals(BANK_PRIVAT) && checkSelectedCurrency(chatId).equals(USD) ||
                 checkSelectedBank(chatId).equals(BANK_PRIVAT) && checkSelectedCurrency(chatId).equals(EUR)) {
             answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
         } else if (checkSelectedBank(chatId).equals(BANK_PRIVAT) && checkSelectedCurrency(chatId).equals(ALL_CURRENCIES)) {
-            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
-            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUsd()));
+            answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEur()));
         }
 
         if (checkSelectedBank(chatId).equals(BANK_NBU) && checkSelectedCurrency(chatId).equals(USD) ||
                 checkSelectedBank(chatId).equals(BANK_NBU) && checkSelectedCurrency(chatId).equals(EUR)) {
             answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
         } else if (checkSelectedBank(chatId).equals(BANK_NBU) && checkSelectedCurrency(chatId).equals(ALL_CURRENCIES)) {
-            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
-            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
+            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUsd()));
+            answer.append(CurrencyServiceNBU.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEur()));
         }
 
         if (checkSelectedBank(chatId).equals(BANK_MONO) && checkSelectedCurrency(chatId).equals(USD) ||
                 checkSelectedBank(chatId).equals(BANK_MONO) && checkSelectedCurrency(chatId).equals(EUR)) {
             answer.append(CurrencyServicePrivatBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getCurrency()));
         } else if (checkSelectedBank(chatId).equals(BANK_MONO) && checkSelectedCurrency(chatId).equals(ALL_CURRENCIES)) {
-            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUSD()));
-            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEUR()));
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getUsd()));
+            answer.append(CurrencyServiceMonoBank.getCurrencyInformation(USERS_SETTINGS.get(chatId).getEur()));
         }
 
 

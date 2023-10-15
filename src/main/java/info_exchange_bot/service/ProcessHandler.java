@@ -3,15 +3,15 @@ package info_exchange_bot.service;
 import info_exchange_bot.service.utilits.Log;
 import info_exchange_bot.service.utilits.commands.BotCommands;
 
-public class ProcessHandler {
+public final class ProcessHandler {
 
     private final BotCommands botCommands;
 
-    public ProcessHandler(TelegramBot telegramBot) {
+    public ProcessHandler(final TelegramBot telegramBot) {
         this.botCommands = new BotCommands(telegramBot);
     }
 
-    public void message(String messageText, String username, long chatId) {
+    public void message(final String messageText, final String username, final long chatId) {
         switch (messageText) {
             case "/start" -> botCommands.start(chatId);
             case "/home" -> botCommands.home(chatId);
@@ -27,7 +27,7 @@ public class ProcessHandler {
         Log.info(username, messageText);
     }
 
-    public void callbackQuery(String callbackData, String userName, long chatIdBackQuery, long messageId) {
+    public void callbackQuery(final String callbackData, final String userName, final long chatIdBackQuery, final long messageId) {
         switch (callbackData) {
             case "\uD83D\uDCB1 Отримати курси валют" -> botCommands.infoMessage(chatIdBackQuery);
             case "⚙ Налаштування", "\uD83D\uDD19 Назад" -> botCommands.settingsMessage(chatIdBackQuery);
@@ -49,6 +49,6 @@ public class ProcessHandler {
             default -> throw new IllegalStateException("Unexpected value: " + callbackData);
         }
 
-        Log.button( userName, callbackData);
+        Log.button(userName, callbackData);
     }
 }

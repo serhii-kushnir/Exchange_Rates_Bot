@@ -17,8 +17,8 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class CurrencyServiceMonoBank {
-    private static final Logger logger = Logger.getLogger(CurrencyServiceMonoBank.class.getName());
+public final class CurrencyServiceMonoBank {
+    private static final Logger LOGGER = Logger.getLogger(CurrencyServiceMonoBank.class.getName());
     private static final String BASE_URL = "https://api.monobank.ua/bank/currency";
     private static final Gson GSON = new Gson();
     private static final HttpClient HTTP_CLIENT = HttpClients.createDefault();
@@ -43,7 +43,7 @@ public class CurrencyServiceMonoBank {
 
             if (statusCode == HttpStatus.SC_OK) {
                 String responseBody = EntityUtils.toString(response.getEntity());
-                List<CurrencyModelMonoBank> currencyList = GSON.fromJson(responseBody, new TypeToken<List<CurrencyModelMonoBank>>() {}.getType());
+                List<CurrencyModelMonoBank> currencyList = GSON.fromJson(responseBody, new TypeToken<List<CurrencyModelMonoBank>>() { }.getType());
 
                 if (currencyList != null) {
                     lastCurrencyList = currencyList;
@@ -53,20 +53,20 @@ public class CurrencyServiceMonoBank {
                 }
             }
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Failed to fetch currency rate from MonoBank API", e);
+            LOGGER.log(Level.SEVERE, "Failed to fetch currency rate from MonoBank API", e);
         }
 
         return lastCurrencyList;
     }
 
-    public static String getCurrencyInformation(String currency) {
+    public static String getCurrencyInformation(final String currency) {
         List<CurrencyModelMonoBank> currencyList = getCurrencyRate();
         StringBuilder result = new StringBuilder();
 
         if (currencyList != null) {
             for (CurrencyModelMonoBank currencyModelMonoBank : currencyList) {
-                if(currencyModelMonoBank.getCurrencyCodeA() == convertCurrencyToNumber(currency) &&
-                        currencyModelMonoBank.getCurrencyCodeB() == 980) {
+                if (currencyModelMonoBank.getCurrencyCodeA() == convertCurrencyToNumber(currency)
+                        && currencyModelMonoBank.getCurrencyCodeB() == 980) {
                     result.append("Курс в Монобанк: ")
                             .append(currency)
                             .append("/UAH\nКупівля: ")
@@ -81,7 +81,7 @@ public class CurrencyServiceMonoBank {
         return result.toString();
     }
 
-    private static int convertCurrencyToNumber(String currency) {
+    private static int convertCurrencyToNumber(final String currency) {
         int currencyNumber = 0;
 
         if (currency.contains("USD")) {
