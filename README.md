@@ -8,18 +8,19 @@
 
 Цей бот має зручний та інтуїтивно зрозумілий інтерфейс з простими кнопками та налаштуваннями, що робить його легким у використанні для користувачів будь-якого рівня навичок.
 
-![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/e23b42d2-54f2-4c5d-8434-52a6ff113ef7)
+![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/06d680a9-45f4-40d4-88ca-87a2dc1af050)
 
-![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/f34a48ea-fcd3-4087-ad32-57db70d74f95)
+![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/4ccab8b8-cd18-4a25-b118-00932a0a9b7c)
 
-![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/67e67a81-32d3-4208-ab71-6b8f67a49655)
+![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/8866535b-b80d-4c08-b298-be8c508bbef7)
 
-![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/06d9a214-4f68-4288-a9e2-5fbd7b5832ad)
+![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/a35b5e00-3f49-430e-bac8-db240268e1d7)
 
-![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/f16ec5a8-c475-4d91-a1f2-2fbc8231abf2)
+![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/650b3221-09dc-4140-a198-7a7eb00fad87)
 
-![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/af3e73a0-05d1-4ce5-8a87-2eb8994ad76f)
+![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/b2211e7d-1cf4-4f07-8bae-8cedb1129b41)
 
-![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/b5da6ce5-a4a4-47d7-93d8-5c0548f98284)
+![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/6079ac19-1c15-49b5-9a9b-3f737ca7beee)
 
-![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/635f3e17-35df-4c9c-8d37-198f8a63c31e)
+![image](https://github.com/serhii-kushnir/Exchange_Rates_Bot/assets/127629681/edc5f2c7-76a1-4228-b2b5-3e22afa14b84)
+
