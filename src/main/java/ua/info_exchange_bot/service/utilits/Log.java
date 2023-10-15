@@ -1,20 +1,15 @@
-package ua.info_exchange_bot.service.utilits;
+package com.example.Info_ExchangeBot.service.utilits;
 
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.sql.Timestamp;
-
 import java.time.LocalDate;
-
-import static ua.info_exchange_bot.service.utilits.Constants.ERROR_FILED;
 
 public final class Log {
 
